@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SELS Study Material — MBM University</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0b0f;
+    --surface: #12141a;
+    --card: #1a1d26;
+    --border: #252836;
+    --accent: #f5a623;
+    --accent2: #4fc3f7;
+    --accent3: #81c784;
+    --accent4: #f48fb1;
+    --text: #e8eaf0;
+    --muted: #6b7280;
+    --highlight: #f5a62322;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Header */
+  .header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+
+  .header-inner {
+    max-width: 1600px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    gap: 1.5rem;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .logo-badge {
+    background: var(--accent);
+    color: #000;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  .logo-text {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+
+  .logo-sub {
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .stats-bar {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.6rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #0f1118 0%, #1a1228 50%, #0f1118 100%);
+    padding: 3rem 2rem 2rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #f5a62308 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-title span { color: var(--accent); }
+
+  .hero-desc {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+  }
+
+  /* Search */
+  .search-row {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .search-box {
+    flex: 1;
+    min-width: 280px;
+    position: relative;
+  }
+
+  .search-box input {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem 0.75rem 2.75rem;
+    font-size: 0.95rem;
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-box input:focus { border-color: var(--accent); }
+  .search-box input::placeholder { color: var(--muted); }
+
+  .search-icon {
+    position: absolute;
+    left: 0.9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 1rem;
+  }
+
+  /* Filters */
+  .filters {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .filter-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-right: 0.25rem;
+  }
+
+  select.filter-select {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+
+  select.filter-select:focus { border-color: var(--accent); }
+
+  .filter-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.8rem;
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+
+  /* Tag Pills for Branch */
+  .branch-pills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  .branch-pill {
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .branch-pill:hover { transform: translateY(-1px); }
+  .branch-pill.active { font-weight: 600; transform: translateY(-1px); }
+
+  /* Main layout */
+  .main {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+  }
+
+  /* Results info */
+  .results-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .results-count {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .results-count span { color: var(--accent); font-weight: 600; }
+
+  .view-toggle {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .view-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.4rem 0.7rem;
+    cursor: pointer;
+    color: var(--muted);
+    transition: all 0.2s;
+    font-size: 0.85rem;
+  }
+
+  .view-btn.active { background: var(--accent); color: #000; border-color: var(--accent); }
+
+  /* Grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1rem;
+  }
+
+  .grid.list-view {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  /* Card */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    transition: all 0.25s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--branch-color, var(--accent)), transparent);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .card:hover {
+    border-color: var(--branch-color, var(--accent));
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    background: var(--surface);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .card-badges {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .badge {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+    line-height: 1.3;
+  }
+
+  .card-desc {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.85rem;
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .card-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .btn-primary {
+    flex: 1;
+    background: var(--branch-color, var(--accent));
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: 'Outfit', sans-serif;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { opacity: 0.88; transform: scale(0.98); }
+
+  .btn-copy {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+
+  .btn-copy:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-copy.copied { border-color: var(--accent3); color: var(--accent3); }
+
+  /* List card */
+  .grid.list-view .card {
+    padding: 0.85rem 1.25rem;
+    border-radius: 8px;
+  }
+
+  .grid.list-view .card-header { margin-bottom: 0.3rem; }
+  .grid.list-view .card-desc { margin-bottom: 0.5rem; font-size: 0.75rem; }
+  .grid.list-view .card-meta { margin-bottom: 0.5rem; }
+
+  /* No results */
+  .no-results {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--muted);
+  }
+
+  .no-results h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  /* Pagination */
+  .pagination {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .page-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    transition: all 0.2s;
+  }
+
+  .page-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .page-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 700; }
+  .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .page-info {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    padding: 0 0.5rem;
+  }
+
+  /* Footer */
+  .footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  .footer p { color: var(--muted); font-size: 0.8rem; line-height: 1.8; }
+  .footer a { color: var(--accent); text-decoration: none; }
+
+  /* Scroll to top */
+  .scroll-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    box-shadow: 0 4px 20px rgba(245,166,35,0.4);
+    transition: transform 0.2s;
+  }
+
+  .scroll-top:hover { transform: translateY(-3px); }
+  .scroll-top.visible { display: flex; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header-inner { gap: 1rem; }
+    .stats-bar { display: none; }
+    .hero { padding: 2rem 1rem 1.5rem; }
+    .main { padding: 1rem; }
+    .grid { grid-template-columns: 1fr; }
+  }
+
+  /* Loading */
+  .loading {
+    text-align: center;
+    padding: 3rem;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  /* Semaphore dots animation */
+  @keyframes pulse {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.1); }
+  }
+
+  .dot { display: inline-block; animation: pulse 1.2s ease-in-out infinite; }
+  .dot:nth-child(2) { animation-delay: 0.15s; }
+  .dot:nth-child(3) { animation-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-badge">SELS</div>
+      <div>
+        <div class="logo-text">Study Material Portal</div>
+        <div class="logo-sub">MBM University · Jodhpur</div>
+      </div>
+    </div>
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-num" id="totalCount">3223</div>
+        <div class="stat-label">Total Files</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Branches</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">8</div>
+        <div class="stat-label">Semesters</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <h1 class="hero-title">Every resource.<br><span>One place.</span></h1>
+    <p class="hero-desc">Access 3000+ study materials — books, notes, papers, files & videos — from all departments of MBM University Jodhpur.</p>
+
+    <div class="search-row">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search by title, subject, description…" oninput="applyFilters()">
+      </div>
+      <select class="filter-select" id="semFilter" onchange="applyFilters()">
+        <option value="">All Semesters</option>
+        <option value="civilsem">Civil Sem (1st Yr)</option>
+        <option value="mechanicalsem">Mech Sem (1st Yr)</option>
+        <option value="M1">M1</option>
+        <option value="M2">M2</option>
+        <option value="M3">M3</option>
+        <option value="M4">M4</option>
+        <option value="3sem">3rd Sem</option>
+        <option value="4sem">4th Sem</option>
+        <option value="5sem">5th Sem</option>
+        <option value="6sem">6th Sem</option>
+        <option value="7sem">7th Sem</option>
+        <option value="8sem">8th Sem</option>
+      </select>
+      <select class="filter-select" id="typeFilter" onchange="applyFilters()">
+        <option value="">All Types</option>
+        <option value="book">📚 Books</option>
+        <option value="notes">📝 Notes</option>
+        <option value="paper">📄 Papers</option>
+        <option value="file">📁 Files</option>
+        <option value="video">🎬 Videos</option>
+      </select>
+      <button class="filter-btn" onclick="clearFilters()">✕ Clear</button>
+    </div>
+
+    <div>
+      <span class="filter-label">Branch:</span>
+      <div class="branch-pills" id="branchPills"></div>
+    </div>
+  </div>
+</section>
+
+<main class="main">
+  <div class="results-info">
+    <div class="results-count">Showing <span id="shownCount">—</span> of <span id="filteredCount">—</span> results</div>
+    <div class="view-toggle">
+      <button class="view-btn active" id="gridViewBtn" onclick="setView('grid')" title="Grid view">⊞</button>
+      <button class="view-btn" id="listViewBtn" onclick="setView('list')" title="List view">☰</button>
+    </div>
+  </div>
+
+  <div class="grid" id="resultsGrid">
+    <div class="loading"><span class="dot">●</span> <span class="dot">●</span> <span class="dot">●</span><br>Loading materials…</div>
+  </div>
+
+  <div class="pagination" id="pagination"></div>
+</main>
+
+<footer class="footer">
+  <p>
+    <strong style="color:var(--text)">S.E.L.S — Society of E-Learning Students</strong><br>
+    MBM University, Jodhpur<br>
+    <a href="https://mbmec.weebly.com" target="_blank">mbmec.weebly.com</a> · 
+    <a href="mailto:selsmbmecj@gmail.com">selsmbmecj@gmail.com</a> · 
+    <a href="mailto:guptakapil24000@gmail.com">guptakapil24000@gmail.com</a>
+  </p>
+</footer>
+
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ============================================================
+// DATA — extracted from PDF
+// ============================================================
+const DATA = [
+{"id":1,"title":"ICA BOOK","desc":"Introduction to computer architecture book Morris Mano","sem":"3sem","subject":"INTRODUCTION TO COMPUTER ARCHITECTURE","type":"book","branch":"AI","url":"https://drive.google.com/file/d/1Cq0b_lJ1tB3b7Y3HWZw-GGNc1SaZSODq/view?usp=drivesdk","user":"vranda manihar"},
+{"id":2,"title":"ICA Book Solutions","desc":"ICA Book Morris Mano Solution Pdf","sem":"3sem","subject":"INTRODUCTION TO COMPUTER ARCHITECTURE","type":"book","branch":"AI","url":"https://drive.google.com/file/d/1CuL7XCOesVKoR3NztXBRpAeY3jZjxg3l/view?usp=drivesdk","user":"vranda manihar"},
+{"id":3,"title":"DS file","desc":"3sem Data Science file","sem":"3sem","subject":"Data Science","type":"file","branch":"AI","url":"https://drive.google.com/file/d/1urEzcSnaTHiRzEI5iq-tcEHOYNq5q_G8","user":"Shefali Chouhan"},
+{"id":4,"title":"FDS filework","desc":"Python programming","sem":"3sem","subject":"FUNDAMENTALS OF DATA SCIENCE","type":"file","branch":"AI","url":"https://drive.google.com/file/d/1BbUJ7oY9ZFRrSEAjAJgxpdftHBZnevnc/view?usp=drivesdk","user":"vranda manihar"},
+{"id":5,"title":"OOP Filework","desc":"filework CPP","sem":"3sem","subject":"Object Oriented Programming","type":"file","branch":"AI","url":"https://drive.google.com/file/d/1CKPEShZ60OJnhAVTDOEm4BUpVet78vPJ/view?usp=drivesdk","user":"vranda manihar"},
+{"id":6,"title":"DSA notes","desc":"DSA COMPLETE NOTES","sem":"3sem","subject":"DATA STRUCTURES AND ALGORITHM","type":"notes","branch":"AI","url":"https://drive.google.com/file/d/1CVvI_orXy0prdbDMiwB_CGsweT9T3I0Z/view?usp=drivesdk","user":"vranda manihar"},
+{"id":7,"title":"Floating point representation -1","desc":"FDS notes","sem":"3sem","subject":"Fundamentals of Data science","type":"notes","branch":"AI","url":"https://drive.google.com/file/d/1Cp8JokoieTMmbAhfJ8QKUFtuIzYBwaMh/view?usp=drivesdk","user":"vranda manihar"},
+{"id":8,"title":"Floating point representation -2","desc":"FDS notes","sem":"3sem","subject":"Fundamentals of Data science","type":"notes","branch":"AI","url":"https://drive.google.com/file/d/1CpVOvqV42VpgyrzoftMdp528S99rJFaS/view?usp=drivesdk","user":"vranda manihar"},
+{"id":9,"title":"Numpy and Pandas","desc":"Notes","sem":"3sem","subject":"Fundamentals of Data Science","type":"notes","branch":"AI","url":"https://drive.google.com/file/d/1DPvIEhJQORQB3tROHoSwL7yTQWCEGahI/view?usp=drivesdk","user":"vranda manihar"},
+{"id":10,"title":"Python Notes","desc":"Python handwritten notes","sem":"3sem","subject":"FUNDAMENTALS OF DATA SCIENCE","type":"notes","branch":"AI","url":"https://drive.google.com/file/d/1DIPAtP_HKx7ExVxMRqubem2X9EVUBjIW/view?usp=drivesdk","user":"vranda manihar"},
+{"id":11,"title":"Types Of Variables","desc":"notes","sem":"3sem","subject":"Fundamentals of Data science","type":"notes","branch":"AI","url":"https://drive.google.com/file/d/1Cnzumr7Fkr-CJqZliu4usso4AFKoJWXx/view?usp=drivesdk","user":"vranda manihar"},
+{"id":12,"title":"ICA notes","desc":"Notes","sem":"3sem","subject":"INTRODUCTION TO COMPUTER ARCHITECTURE","type":"notes","branch":"AI","url":"https://drive.google.com/file/d/1BlNnETAFYtXzN6PLYDn7vjSeBBfnFpoA/view?usp=drivesdk","user":"vranda manihar"},
+{"id":13,"title":"ICA unit 3","desc":"notes","sem":"3sem","subject":"Introduction to computer architecture","type":"notes","branch":"AI","url":"https://drive.google.com/file/d/1Buky6gJpCCGd2-tHlUB_nv5viTcU_JC8/view?usp=drivesdk","user":"vranda manihar"},
+{"id":14,"title":"OOP notes","desc":"full notes","sem":"3sem","subject":"Object Oriented Programming","type":"notes","branch":"AI","url":"https://drive.google.com/file/d/1BYVWV1vDXaHQUPexRyPoY6hoPvD6k3OV/view?usp=drivesdk","user":"vranda manihar"},
+{"id":15,"title":"Cyber Crimes and Cyber laws","desc":"Notes","sem":"3sem","subject":"PPCE","type":"notes","branch":"AI","url":"https://drive.google.com/file/d/1DOl8r9eOHgdzuM9LQKfHhV7j0osCB8db/view?usp=drivesdk","user":"vranda manihar"},
+{"id":16,"title":"Intellectual Property Rights","desc":"Notes","sem":"3sem","subject":"PPCE","type":"notes","branch":"AI","url":"https://drive.google.com/file/d/1DPypJDRmovDhiOTivgtQHPcjUgZucAeN/view?usp=drivesdk","user":"vranda manihar"},
+{"id":17,"title":"PPCE remaining notes","desc":"PPCE notes","sem":"3sem","subject":"PPCE","type":"notes","branch":"AI","url":"https://drive.google.com/file/d/1BkzINLK3_8BIj9LhEThxJ-6gzP28Ht1o/view?usp=drivesdk","user":"vranda manihar"},
+{"id":18,"title":"III sem papers 2k24","desc":"endsem papers 2k24","sem":"3sem","subject":"All","type":"paper","branch":"AI","url":"https://drive.google.com/file/d/1DgTG8ta32evQCSIfg3fQ0NN5Hx0E50hL/view?usp=drivesdk","user":"vranda manihar"},
+{"id":19,"title":"Mid Sem 1","desc":"Mid sem 1 papers 2k23","sem":"3sem","subject":"All","type":"paper","branch":"AI","url":"https://drive.google.com/file/d/1BsabAYbyqi6ihrJwF-GkQ7FNDLRt02Wz/view?usp=drivesdk","user":"vranda manihar"},
+{"id":20,"title":"MidSem 2 Papers","desc":"MID SEM 2 ALL PAPERS","sem":"3sem","subject":"All subjects","type":"paper","branch":"AI","url":"https://drive.google.com/file/d/1B_FzDIHmeSHU1R1gh8m9BdlYNzdzOu8n/view?usp=drivesdk","user":"vranda manihar"},
+{"id":21,"title":"discrete mathematics 2023 examination paper","desc":"","sem":"4sem","subject":"discrete mathematics","type":"paper","branch":"AI","url":"https://drive.google.com/file/d/1FOnZThC4B5NhWqbSBJj0ptXCbasyqVP2","user":"kanchan kumari"},
+{"id":22,"title":"FSI 2024","desc":"FSI 4th sem","sem":"4sem","subject":"FSI","type":"paper","branch":"AI","url":"https://drive.google.com/file/d/1J8lsk9_mKTxs7TJneHBae60cutd64Lwq/view?","user":"Ankit Kumar"},
+{"id":23,"title":"Fundamentals of Artificial Intelligence 2025","desc":"FAI 2025 AI","sem":"5sem","subject":"Fundamentals of Artificial Intelligence","type":"paper","branch":"AI","url":"https://drive.google.com/file/d/1HuD5Foa6uzeWZbXhPijY_2UaC3lHSKrm/view?usp=drivesdk","user":"Deepak Yadav"},
+{"id":24,"title":"Machine Learning AI","desc":"Machine Learning 2025 AI","sem":"5sem","subject":"Machine learning","type":"paper","branch":"AI","url":"https://drive.google.com/file/d/1cQR0s-hxOaPWrcwAYqQuGoFK127x1BSb/view?usp=drivesdk","user":"Deepak Yadav"},
+{"id":25,"title":"Operating Systems 2025","desc":"OS 2025 AI","sem":"5sem","subject":"Operating Systems","type":"paper","branch":"AI","url":"https://drive.google.com/file/d/1GyfpVZH6aWjLepWFOkkwQRnYFNq6ED-w/view?usp=drivesdk","user":"Deepak Yadav"},
+{"id":26,"title":"Software Engineering 2025","desc":"SE 2025 AI","sem":"5sem","subject":"Software Engineering","type":"paper","branch":"AI","url":"https://drive.google.com/file/d/1SYfRfj9Yy0h9ZjQm_GIQM3Npm1ED0Qp_/view?usp=drivesdk","user":"Deepak Yadav"},
+{"id":27,"title":"Web Application Development 2025","desc":"WAD 2025 AI","sem":"5sem","subject":"Web Application Development","type":"paper","branch":"AI","url":"https://drive.google.com/file/d/1vEQbUNoUtf25aCXQIivmxBx9VUgNI4yT/view?usp=drivesdk","user":"Deepak Yadav"},
+{"id":28,"title":"Big Data Analytics 2025","desc":"BDA 2025 AI","sem":"6sem","subject":"Big Data Analytics","type":"paper","branch":"AI","url":"https://drive.google.com/file/d/1rh7EcOHTc8sI965lHdha8scEkNpMmQcn/view?usp=drivesdk","user":"Deepak Yadav"},
+{"id":29,"title":"Image Processing 2025","desc":"IP 2025 AI","sem":"6sem","subject":"Image Processing","type":"paper","branch":"AI","url":"https://drive.google.com/file/d/1uuDTJiVF8JHpykg67v4Yi5iz0r_KohVx/view?usp=drivesdk","user":"Deepak Yadav"},
+{"id":30,"title":"Natural Language Processing 2025","desc":"NLP 2025 AI","sem":"6sem","subject":"Natural Language Processing","type":"paper","branch":"AI","url":"https://drive.google.com/file/d/14jvfO4X7Dv2_F6ubPxqd4mv4brC2mL9Q/view?usp=drivesdk","user":"Deepak Yadav"},
+{"id":31,"title":"Neural Networks 2025","desc":"NN 2025 AI","sem":"6sem","subject":"Neural Networks","type":"paper","branch":"AI","url":"https://drive.google.com/file/d/1kXJsQ1wS2HVipizXcQzslmQoljBCQSZg/view?usp=drivesdk","user":"Deepak Yadav"},
+{"id":32,"title":"DISCRETE PROBABILITY","desc":"Maths For Computing Probability Questions and Examples","sem":"M3","subject":"Maths for Computing","type":"book","branch":"AI","url":"https://drive.google.com/file/d/1Bq019xcjE9uxuD5qU5NP8l3TijerLVn7/view?usp=drivesdk","user":"vranda manihar"},
+{"id":33,"title":"Maths for Computing","desc":"Notes full","sem":"M3","subject":"MATHS FOR COMPUTING","type":"notes","branch":"AI","url":"https://drive.google.com/file/d/1CzepN7RLr49EW9WeYg8lJ8VAyYnT17UM/view?usp=drivesdk","user":"vranda manihar"},
+{"id":34,"title":"CT Tutorial File","desc":"3sem Construction Technology file","sem":"3sem","subject":"Construction Technology","type":"file","branch":"BCT","url":"https://drive.google.com/file/d/1snxyxgibgiNzg0ti2YY8weNH1AGpwmxx/view?usp=drivesdk","user":"Manisha choudhary"},
+{"id":35,"title":"Sheets","desc":"construction technology file","sem":"3sem","subject":"construction technology","type":"file","branch":"BCT","url":"https://drive.google.com/file/d/1Sfzafg6lnubEGqszxbgF9C2aidQeqpJR/view?usp=drivesdk","user":"Manisha choudhary"},
+{"id":36,"title":"file","desc":"strength of material file","sem":"3sem","subject":"strength of material","type":"file","branch":"BCT","url":"","user":"Chirag Soni"},
+{"id":37,"title":"Egyptian Architecture","desc":"BC","sem":"3sem","subject":"Building construction","type":"notes","branch":"BCT","url":"https://drive.google.com/file/d/1O0jHRKWF_LBEpqsqWjq7rScQ0LclC7xo/view?usp=drivesdk","user":"Mahesh choudhary"},
+{"id":38,"title":"Techeometry","desc":"Surveying","sem":"3sem","subject":"Topographical Surveying","type":"notes","branch":"BCT","url":"https://drive.google.com/file/d/1CDFky1Asu_UbIov_bxz0Tlx7nAhOn7EY/view?usp=drivesdk","user":"Manisha choudhary"},
+{"id":39,"title":"Mid Term Paper","desc":"","sem":"3sem","subject":"all","type":"paper","branch":"BCT","url":"https://drive.google.com/file/d/1-W1TldYCRMbigS0WHOWMOPVfhegaOh-o/view?usp=drivesdk","user":"Manisha choudhary"},
+{"id":40,"title":"PYQs 2024-25","desc":"2024 25","sem":"3sem","subject":"all","type":"paper","branch":"BCT","url":"https://drive.google.com/file/d/1-TnHmsV_Cqn8_vhPCjv81ho94KGMxhNO/view?usp=drivesdk","user":"Manisha choudhary"},
+{"id":41,"title":"Mid Term-1 paper","desc":"papers","sem":"3sem","subject":"All Subjects","type":"paper","branch":"BCT","url":"https://drive.google.com/file/d/1Sax2L9BFZOdMzM2ofEy25ArzgGOIOx6H/view?usp=drivesdk","user":"Manisha choudhary"},
+{"id":42,"title":"BCT New Syllabus","desc":"syllabus","sem":"4sem","subject":"all","type":"notes","branch":"BCT","url":"https://drive.google.com/file/d/1GhXe6gC-r6Ut2GrL6rB46jJ02ev-E-26/view?usp=drivesdk","user":"Manisha choudhary"},
+{"id":43,"title":"SP16","desc":"","sem":"5sem","subject":"RCC","type":"notes","branch":"BCT","url":"https://drive.google.com/file/d/1W0E0DIdcsy-UFxyyFMvLSekx6U8rshfY/view?usp=drivesdk","user":"Narendra Kumar Solanki"},
+{"id":44,"title":"Structural Dynamics 2025","desc":"Structural Dynamics 2025 Open Elective 5th Semester 5OE61A","sem":"5sem","subject":"Structural Dynamics","type":"paper","branch":"BCT","url":"https://drive.google.com/file/d/1AEky_EZVwH1TyPjomZgLuGFT8RccRnlJ/view?usp=drivesdk","user":"Deepak Yadav"},
+{"id":45,"title":"SP16","desc":"","sem":"6sem","subject":"RCC","type":"notes","branch":"BCT","url":"https://drive.google.com/file/d/1W0E0DIdcsy-UFxyyFMvLSekx6U8rshfY/view?usp=drivesdk","user":"Narendra Kumar Solanki"},
+{"id":46,"title":"Finite Element Method 2025","desc":"Finite Element Method 2025 6th Semester 6OE61A","sem":"6sem","subject":"Finite Element Method","type":"paper","branch":"BCT","url":"https://drive.google.com/file/d/1Oz6EWHCcy5xiZ9i_p-HDl3SNnJpiVfK6/view?usp=drivesdk","user":"Deepak Yadav"},
+{"id":47,"title":"SP16","desc":"","sem":"7sem","subject":"RCC","type":"notes","branch":"BCT","url":"https://drive.google.com/file/d/1W0E0DIdcsy-UFxyyFMvLSekx6U8rshfY/view?usp=drivesdk","user":"Narendra Kumar Solanki"},
+{"id":48,"title":"Syllabus","desc":"","sem":"7sem","subject":"Structural Engineering","type":"notes","branch":"BCT","url":"https://drive.google.com/drive/folders/1rAy8dvR4-eErFEklrjJ-5MMQhViMm9A0","user":"Kapil Gupta"},
+{"id":49,"title":"Internship Report (For Reference only)","desc":"Summer Training Report","sem":"8sem","subject":"Border Roads Organization (B.R.O)","type":"file","branch":"BCT","url":"https://drive.google.com/file/d/17zi7hw2S5yvV9QIMnjWRTGxTc0SttCcX/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":50,"title":"SP16","desc":"","sem":"8sem","subject":"RCC","type":"notes","branch":"BCT","url":"https://drive.google.com/file/d/1W0E0DIdcsy-UFxyyFMvLSekx6U8rshfY/view?usp=drivesdk","user":"Narendra Kumar Solanki"},
+{"id":51,"title":"Engineering Mathematics","desc":"","sem":"3sem","subject":"B S Grewal","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1l8F3WmnDbrKeVH6qhLU_a6Oho2z3TKQF/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":52,"title":"Surveying Vol.-2","desc":"","sem":"3sem","subject":"B.C. Punmia","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1_xQowDMjUQYFL65vKAf6NeDwmHVaGACP/view","user":"Kapil Gupta"},
+{"id":53,"title":"Town Planning","desc":"","sem":"3sem","subject":"Building and Town Planning","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1IKoHK9eVadn4Hugf1WKScu4lxueV8aNV/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":54,"title":"NBC Vol.-1","desc":"","sem":"3sem","subject":"BUREAU OF INDIAN STANDARDS","type":"book","branch":"CE","url":"https://drive.google.com/file/d/17yXzsdASZhaVANxJqZlmdShDt9nZaIt5/view","user":"Kapil Gupta"},
+{"id":55,"title":"NBC Vol.-2","desc":"","sem":"3sem","subject":"BUREAU OF INDIAN STANDARDS","type":"book","branch":"CE","url":"https://drive.google.com/file/d/17x-qhknJ2yz18-5MWOQf1M5yQwmpYlsg/view","user":"Kapil Gupta"},
+{"id":56,"title":"Building Construction","desc":"By B.C. Punmia","sem":"3sem","subject":"Building Construction","type":"book","branch":"CE","url":"https://drive.google.com/file/d/18BJT4uyXfY8GXl7CBK1eX1S-4bV2jB8S/view","user":"Kapil Gupta"},
+{"id":57,"title":"Mechanics Of Material","desc":"By R.C. HIBBELER","sem":"3sem","subject":"Mechanics Of Material","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1518GL7GLMDpJjn6hxGIN1CzJ3qM7UW9e/view","user":"Kapil Gupta"},
+{"id":58,"title":"Highway Engineering","desc":"By S.K. Khanna","sem":"3sem","subject":"Highway Engineering","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1XVBcrufVvf2_FeFdgmP4UqxnylkQAAoT/view","user":"Kapil Gupta"},
+{"id":59,"title":"Building Design","desc":"Construction Technology","sem":"3sem","subject":"Construction Technology","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1W0lA5vcHm8St9W4uI-eAvWkxC5nELfBZ/view","user":"Kapil Gupta"},
+{"id":60,"title":"Surveying Vol-1","desc":"Dr. B.C. Punmia","sem":"3sem","subject":"Surveying","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1Bw9rm97ypg4RaXeiq1EVGVeTolr8oREm/view","user":"Kapil Gupta"},
+{"id":61,"title":"Fluid Mechanics And Hydraulic Machines","desc":"","sem":"3sem","subject":"FMHM","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1kYIsbqW8YuvfsdCqmaPaiLfFeK_c0yPj/view?usp=drivesdk","user":"Priya Balundiya"},
+{"id":62,"title":"Mechanic of Material","desc":"Gere & Timoshenko","sem":"3sem","subject":"Mechanics of Material","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1ctXCYJFukBkC2pQLvMxlGQwMstaHrr5B/view","user":"Kapil Gupta"},
+{"id":63,"title":"Engineering Geology","desc":"K M Bangur","sem":"3sem","subject":"Engineering Geology","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1mHYTGwyn-V8gn7TXWpN0cYP7Wd_hUUE4/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":64,"title":"Fluid Mechanics","desc":"P.N. Modi & Seth","sem":"3sem","subject":"Fluid Mechanics","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1cpRgS35I1NeaceDSoDacTIELKCNlZyuQ/view","user":"Kapil Gupta"},
+{"id":65,"title":"FLUID MECHANICS CE 206-A","desc":"P.N. MODI & SETH","sem":"3sem","subject":"Fluid Mechanics","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1BRPa91Chkh3mRZejeXrJnjcLQ4Nw9Kyo/view?usp=share_link","user":"Rituraj singh"},
+{"id":66,"title":"Fluid Mechanics","desc":"R.K. Bansal","sem":"3sem","subject":"Fluid Mechanics","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1CyHhNF6CV99Lu3_PjIGiUVbhNFVqFL_-/view?usp=sharing","user":"Kapil Gupta"},
+{"id":67,"title":"SOM Timoshenko","desc":"Stephen Timoshenko Strength of Materials","sem":"3sem","subject":"SOM","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1dpGBRti0-GHQA1aE2xfsKHTmm4LGn5N6/view?usp=drivesdk","user":"Sanjay Vishnoi"},
+{"id":68,"title":"B. C Punmia - Surveying Vol. 1","desc":"","sem":"3sem","subject":"Surveying","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1-6iW861NzIe7q_xHHAiSDJclgCbEXe3X/view?usp=drivesdk","user":"Sanjay Vishnoi"},
+{"id":69,"title":"New Syllabus","desc":"","sem":"3sem","subject":"Civil Engineering Syllabus","type":"file","branch":"CE","url":"https://drive.google.com/file/d/1kZFyx3YbHaHsLxSCI659-g-AHq1cSM-p/view?usp=drivesdk","user":"Sanjay Vishnoi"},
+{"id":70,"title":"Old Syllabus","desc":"","sem":"3sem","subject":"Civil Engineering Syllabus","type":"file","branch":"CE","url":"http://52.172.14.165/JNVUDOCUMENTS/JNVUIUMS//Notifications/20201215190137918.pdf","user":"Kapil Gupta"},
+{"id":71,"title":"FM Lab Mannual","desc":"","sem":"3sem","subject":"Fluid Mechanics","type":"file","branch":"CE","url":"https://drive.google.com/file/d/1HRzbJE6ERecGC7dCh2FI7tG11-RYTupI/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":72,"title":"FM Lab Manual","desc":"Fluid Mechanics Practicals","sem":"3sem","subject":"Fluid Mechanics","type":"file","branch":"CE","url":"https://drive.google.com/file/d/1VMzk8iNCiYTCG5oG36CNlTrJQRUzP0da/view","user":"Kapil Gupta"},
+{"id":73,"title":"Geology Practical File","desc":"","sem":"3sem","subject":"Geology Lab","type":"file","branch":"CE","url":"https://drive.google.com/file/d/1571esLuoJZczz5ojddGoaG6xPTGwsc6m/view","user":"Kapil Gupta"},
+{"id":74,"title":"Minerals Photos","desc":"","sem":"3sem","subject":"Geology Lab","type":"file","branch":"CE","url":"https://drive.google.com/file/d/13UtolEt5g-DMMvTIoZT7TDjPOHkQsCRM/view","user":"Kapil Gupta"},
+{"id":75,"title":"Material Testing Lab Manual","desc":"","sem":"3sem","subject":"Material Testing Lab","type":"file","branch":"CE","url":"https://drive.google.com/file/d/1D7Hxx_A0N2aA3mRplJ9IwXHPqYpQL6h3/view?usp=drivesdk","user":"Priya Balundiya"},
+{"id":76,"title":"CT Sheets","desc":"Practicals Sheets","sem":"3sem","subject":"Practicals","type":"file","branch":"CE","url":"https://drive.google.com/drive/u/1/folders/1bSFhJygw1bTx-Et-oMxrnUvJ7wyzUF_c","user":"Kapil Gupta"},
+{"id":77,"title":"Civil Sheets","desc":"3rd sem civil sheets of SURVEYING","sem":"3sem","subject":"SURVEYING","type":"file","branch":"CE","url":"https://drive.google.com/file/d/15m65ZoZT9vh1b7DSsHH2PY4Qs_x_Wrk4/view?usp=drivesdk","user":"Sunil Suman"},
+{"id":78,"title":"Simple circular Curve","desc":"PERPENDICULAR OFFSET FROM Tangent Method","sem":"3sem","subject":"Surveying","type":"file","branch":"CE","url":"https://drive.google.com/file/d/1e5emjz3lg8t8u5p0eMpnT9bAn1oaZIPP/view?usp=drivesdk","user":"Narendra Kumar Solanki"},
+{"id":79,"title":"Surveying tutorial copy","desc":"CIVIL 3rd SEMESTER","sem":"3sem","subject":"Surveying","type":"file","branch":"CE","url":"https://drive.google.com/file/d/1087c0SO2gXv3ooyv1cqLCLY3hGM7fTHN/view?usp=drivesdk","user":"NARENDRA K. SOLANKI"},
+{"id":80,"title":"VIVA-VOCE","desc":"","sem":"3sem","subject":"ALL SUBJECTS","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/1gkASgNy6YGC2knkDbbLN_F8m5bAns_8q/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":81,"title":"Building Material and Construction Technology","desc":"Handwritten Notes for Semester, JE and Gate ESE Exams","sem":"3sem","subject":"BMC","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/1Bdglmg7-EIvqCnBDQkvbZVyJW8tQwvbV/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":82,"title":"Town Planning Notes","desc":"","sem":"3sem","subject":"Building and Town Planning","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/1IMFrAX4cFLwDlazdHN5R2oRoDAOivFCr/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":83,"title":"Town Planning Solved PYQs","desc":"Town-Planning CE notes","sem":"3sem","subject":"Town Planning","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/1MXDwggaqmrLQv4JyznlPceRJ0vuY1yQ_/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":84,"title":"GOOGLE CLASSROOM","desc":"","sem":"3sem","subject":"CIVIL ENGINEERING","type":"notes","branch":"CE","url":"https://classroom.google.com/c/NTE1Njg0NTY4MjE5?cjc=a3qy227","user":"Kapil Gupta"},
+{"id":85,"title":"Site Plan","desc":"","sem":"3sem","subject":"Construction Technology","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/1KO9G90yvvuoOYSj8k9DB046RGNUiop6S/view","user":"Kapil Gupta"},
+{"id":86,"title":"Contouring","desc":"","sem":"3sem","subject":"Contour Surveying","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/11kRGmj5ztWxkEKqQM_cciq4XUzdXRPi6/view","user":"Kapil Gupta"},
+{"id":87,"title":"Planning for Residential Buildings","desc":"CT Lecture-2","sem":"3sem","subject":"Construction Technology","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/13yyC-A9uYVF9wJXodMycHBwQ5Ks01mNB/view","user":"Kapil Gupta"},
+{"id":88,"title":"Foundations","desc":"CT Lecture-3","sem":"3sem","subject":"Construction Technology","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/19sOmaTV8BXBhIPalYXWQq52pGl4FUfZh/view","user":"Kapil Gupta"},
+{"id":89,"title":"Design Loads","desc":"CT Lecture-4","sem":"3sem","subject":"Construction Technology","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/1UYpzIG6zwBqoagSoeWilvCPx2uEbLnKy/view","user":"Kapil Gupta"},
+{"id":90,"title":"FM Short Notes","desc":"For Viva Only","sem":"3sem","subject":"Fluid Mechanics","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/18txG7H58A6QTXa0StbuuUMb6Ovpu43GP/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":91,"title":"FM Notes-1","desc":"","sem":"3sem","subject":"Fluid Mechanics Short Notes","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/1qjlG9hkveaWt6IQpnElAvVr5J7sJauHB/view","user":"Kapil Gupta"},
+{"id":92,"title":"FM Notes-2","desc":"","sem":"3sem","subject":"Fluid Mechanics Short Notes","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/1p2nCWI9AlhagUC3gxrWmOfHG993TdlWY/view?usp=sharing","user":"Kapil Gupta"},
+{"id":93,"title":"SOM Engineering Mechanics","desc":"Strength of Material","sem":"3sem","subject":"S.O.M Basics","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/125SEBiz8GHhYWeeBVvArbXjG9EYtiS57/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":94,"title":"Analysis Of Stress & Strain (Mohr's Circle)","desc":"","sem":"3sem","subject":"SOM","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/15bxH2Eq8urNxAWFDbYSeUrAfCxleo0mJ/view","user":"Kapil Gupta"},
+{"id":95,"title":"Curves","desc":"","sem":"3sem","subject":"Surveying","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/1lZkSGjCdwaiuhbQ7wZkdxF6TD5NkGh4X/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":96,"title":"Surveying Class Notes","desc":"Surveying Class Notes","sem":"3sem","subject":"Surveying","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/1qYWphZe6tgMf-MV2rJRq6EZpWoH7s1hc/view?usp=sharing","user":"NARENDRA K. SOLANKI"},
+{"id":97,"title":"SURVEYING NOTES","desc":"","sem":"3sem","subject":"SURVEYING","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/16VfBUD462nU9_wqzYtOnYV8yjBQySjsF/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":98,"title":"Theodolite, Traversing","desc":"","sem":"3sem","subject":"Surveying","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/1gug1jlIPBAY4aLJ3A-vNr8uGXDm3MsZ3/view","user":"Kapil Gupta"},
+{"id":99,"title":"Civil 3rd Sem Syllabus","desc":"Only 3rd sem Syllabus","sem":"3sem","subject":"Syllabus","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/1-SbwowzTA-0rr-p6GTfX3-2Cah-ZSoEl/view?usp=drivesdk","user":"Sanjay Vishnoi"},
+{"id":100,"title":"Plane-Table Surveying","desc":"","sem":"3sem","subject":"Tacheometry Surveying","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/17zRe38XpkxqiO7NeD2lLt_OvyEwvu0W6/view","user":"Kapil Gupta"},
+{"id":101,"title":"Tacheometry","desc":"","sem":"3sem","subject":"Tacheometry Surveying","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/11jg6mA_g1FwfwnAumXgQXSqmXSHjmhXy/view","user":"Kapil Gupta"},
+{"id":102,"title":"Highway Engineering","desc":"","sem":"3sem","subject":"Transportation Engineering","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/1IarbLjw1A-tXmbvmLKR8xfBxgjZtePq-/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":103,"title":"Pavement Design","desc":"","sem":"3sem","subject":"Transportation Engineering","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/1MxuU2gwMQKHu8eKWdw1P9_fyfAPo907y/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":104,"title":"Traffic Engineering","desc":"","sem":"3sem","subject":"Transportation Engineering","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/1MjZF6IJvdFp1EMZLfVtYUNCjWX66ulak/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":105,"title":"Previous Year's Papers","desc":"","sem":"3sem","subject":"3rd SEM Papers","type":"paper","branch":"CE","url":"https://mbmec.weebly.com/civil2.html","user":"Kapil Gupta"},
+{"id":106,"title":"Papers civil 2023","desc":"","sem":"3sem","subject":"All Subjects","type":"paper","branch":"CE","url":"https://drive.google.com/file/d/10nqtGcOLhSjooQ5bUxnWI3hG0WNV1z_f/view?usp=drivesdk","user":"Devraj Gurjar"},
+{"id":107,"title":"Architecture and Town Planning Papers","desc":"Previous year paper","sem":"3sem","subject":"Architecture and Town Planning","type":"paper","branch":"CE","url":"https://drive.google.com/file/d/1CR9CYUkOHKi1XGrDlNRzPp7s3Zshu3kI/view?usp=share_link","user":"Samit Singhvi"},
+{"id":108,"title":"OFFLINE PAPERS -2","desc":"","sem":"3sem","subject":"FM","type":"paper","branch":"CE","url":"https://drive.google.com/file/d/16mxsL4RznTNtc0INhs_EBeDzGlngadGM/view?usp=drivesdk","user":"NARENDRA KUMAR SOLANKI"},
+{"id":109,"title":"Offline Papers 2019","desc":"","sem":"3sem","subject":"FM","type":"paper","branch":"CE","url":"https://drive.google.com/file/d/179w-0t3gMa4CWPryYh_aGF3MO8mSOPt5/view?usp=drivesdk","user":"NARENDRA KUMAR SOLANKI"},
+{"id":110,"title":"Offline Papers","desc":"","sem":"3sem","subject":"M3","type":"paper","branch":"CE","url":"https://drive.google.com/file/d/17CUGld0rXKKGn7DGs8QeTRPwCAqVnNx2/view?usp=drivesdk","user":"NARENDRA KUMAR SOLANKI"},
+{"id":111,"title":"Offline Papers 2020","desc":"","sem":"3sem","subject":"M3","type":"paper","branch":"CE","url":"https://drive.google.com/file/d/16tTTOdHRg22bMK9Ibg4XZBIjHIhSSKCK/view?usp=drivesdk","user":"NARENDRA KUMAR SOLANKI"},
+{"id":112,"title":"Mid Term - I (2024)","desc":"First Mid term (2023-2024)","sem":"3sem","subject":"Paper","type":"paper","branch":"CE","url":"https://drive.google.com/file/d/1qujZMelSvQTVlNoGhXO4DDW73To_vvq5/view?usp=drivesdk","user":"Sanjay Vishnoi"},
+{"id":113,"title":"Mid Term - II (2024)","desc":"Second Mid term (2023-2024)","sem":"3sem","subject":"Paper","type":"paper","branch":"CE","url":"https://drive.google.com/file/d/1qvDg6z9Pkvzo65fpmvHshF2QE7fFDNx0/view?usp=drivesdk","user":"Sanjay Vishnoi"},
+{"id":114,"title":"Paper Civil 2024","desc":"3rd Sem 2023-24 Session papers","sem":"3sem","subject":"Paper","type":"paper","branch":"CE","url":"https://drive.google.com/file/d/1qwzVy-beAfb9w9TckuGtuzRBRP9QYmCz/view?usp=drivesdk","user":"Sanjay Vishnoi"},
+{"id":115,"title":"Offline Papers","desc":"","sem":"3sem","subject":"SOM","type":"paper","branch":"CE","url":"https://drive.google.com/file/d/172l9lPOfUiIsgqiZTBt4NFM7-fab-u92/view?usp=drivesdk","user":"NARENDRA KUMAR SOLANKI"},
+{"id":116,"title":"SOM Important Viva Questions","desc":"","sem":"3sem","subject":"Strength of Material","type":"paper","branch":"CE","url":"https://drive.google.com/file/d/1IPX7TrseBKZSycKGDOFRCnT71qRT3cLB/view","user":"Kapil Gupta"},
+{"id":117,"title":"Offline Papers","desc":"","sem":"3sem","subject":"Surveying","type":"paper","branch":"CE","url":"https://drive.google.com/file/d/172u3kgnw9ZBjYJcme4ucrGxzu_Rx8QfY/view?usp=drivesdk","user":"NARENDRA KUMAR SOLANKI"},
+{"id":118,"title":"Mechanics Of Material","desc":"B C Punmia","sem":"4sem","subject":"Mechanics Of Material","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1mCqRMCfldFt486Sy5O2_POCNxSC4xJMc/view?usp=sharing","user":"Kapil Gupta"},
+{"id":119,"title":"THEORY OF STRUCTURE","desc":"B.C PUNMIA","sem":"4sem","subject":"Theory of Structure","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1LBel8XLk4AXNM5gVlqDgiVMxcXoNKCUZ/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":120,"title":"Building Construction","desc":"BMC Book B.C. Punmia","sem":"4sem","subject":"Building Construction","type":"book","branch":"CE","url":"https://drive.google.com/file/d/18BJT4uyXfY8GXI7CBK1eX1S-4bV2jB8S/view","user":"Kapil Gupta"},
+{"id":121,"title":"Sureying Vol-2","desc":"B.C. Punmia","sem":"4sem","subject":"Surveying","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1_xQowDMjUQYFL65vKAf6NeDwmHVaGACP/view","user":"Kapil Gupta"},
+{"id":122,"title":"Surveying Vol-1","desc":"B.C. Punmia","sem":"4sem","subject":"Surveying","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1wPtP8o7GZ4XdvaQbmWUwk62ysNtjICn1/view","user":"Kapil Gupta"},
+{"id":123,"title":"C.T BY P.C VARGEHSE","desc":"CONSTRUCTION TECHNOLOGY","sem":"4sem","subject":"Construction Technology","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1enBQ5KrSLMW3Uzd3OnxgLqLHhy8iiyAx/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":124,"title":"Fluid Mechanics And Hydraulic Machines","desc":"FMHM","sem":"4sem","subject":"Fluid Mechanics","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1kYIsbqW8YuvfsdCqmaPaiLfFeK_c0yPj/view?usp=drivesdk","user":"Priya Balundiya"},
+{"id":125,"title":"RAILWAY ENGINEERING","desc":"M.M. AGARWAL, SATISH CHANDRA","sem":"4sem","subject":"Railway Engineering","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1wPtP8o7GZ4XdvaQbmWUwk62ysNtjICn1/view","user":"Kapil Gupta"},
+{"id":126,"title":"Fluid Mechanics","desc":"Modi & Seth","sem":"4sem","subject":"Fluid Mechanics","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1cpRgS35I1NeaceDSoDacTIELKCNlZyuQ/view","user":"Kapil Gupta"},
+{"id":127,"title":"Airport Engineering","desc":"Norman J. Ashford Saleh Mumayiz Paul H. Wright","sem":"4sem","subject":"Airport Engineering","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1dylcu-RVeJfRPNpxWNfR6030atT-Lkqi/view","user":"Kapil Gupta"},
+{"id":128,"title":"Fluid Mechanics","desc":"R.K. Bansal","sem":"4sem","subject":"Fluid Mechanics","type":"book","branch":"CE","url":"https://drive.google.com/file/d/1CyHhNF6CV99Lu3_PjIGiUVbhNFVqFL_-/view","user":"Kapil Gupta"},
+{"id":129,"title":"New Syllabus","desc":"Civil Engineering Syllabus","sem":"4sem","subject":"Civil Engineering Syllabus","type":"file","branch":"CE","url":"https://drive.google.com/file/d/1kZFyx3YbHaHsLxSCI659-g-AHq1cSM-p/view?usp=drivesdk","user":"Sanjay Vishnoi"},
+{"id":130,"title":"Old Syllabus","desc":"Civil Engineering Syllabus","sem":"4sem","subject":"Civil Engineering Syllabus","type":"file","branch":"CE","url":"http://52.172.14.165/JNVUDOCUMENTS/JNVUIUMS//Notifications/20201215190137918.pdf","user":"Kapil Gupta"},
+{"id":131,"title":"CT SHEET","desc":"construction technology","sem":"4sem","subject":"Construction Technology","type":"file","branch":"CE","url":"https://drive.google.com/file/d/1hym6OQ9dQh1liLJNqDyluwO8LQ7YbYmb","user":"lavish singhal"},
+{"id":132,"title":"Sheet-1","desc":"Sheet-1 Questions CONSTRUCTION TECHNOLOGY","sem":"4sem","subject":"CONSTRUCTION TECHNOLOGY","type":"file","branch":"CE","url":"https://drive.google.com/file/d/1ngX_xYyiyG1n5Ey3yjEK90AwGFU4c7qc","user":"Narendra Kumar"},
+{"id":133,"title":"Stair sheet","desc":"Stair sheet","sem":"4sem","subject":"Construction Technology","type":"file","branch":"CE","url":"https://drive.google.com/file/d/1xlyYa6PTb6sDh6sKIv-2aY6Ys2pztYXi/view?usp=sharing","user":"NARENDRA K. SOLANKI"},
+{"id":150,"title":"4th Sem Syllabus","desc":"Syllabus","sem":"4sem","subject":"All Subjects","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/1jxiHGoKXi0Zv_xhgk8zlxbzJoyaFtIYR/view?usp=drivesdk","user":"Sanjay Vishnoi"},
+{"id":175,"title":"Railway","desc":"Notes","sem":"4sem","subject":"Transportation Engg - II","type":"notes","branch":"CE","url":"https://drive.google.com/file/d/1y33pm4vG9wj8e9tpxhR1zaiUSnvM0dET/view?usp=drivesdk","user":"Sanjay Vishnoi"},
+{"id":178,"title":"MidSem - I 2024","desc":"","sem":"4sem","subject":"All","type":"paper","branch":"CE","url":"https://drive.google.com/file/d/1y2icO9tvhdY7N5lo_t-3Q65pTfKF5oNG/view?usp=drivesdk","user":"Sanjay Vishnoi"},
+{"id":179,"title":"MidSem - II 2024","desc":"4th Sem","sem":"4sem","subject":"ALL","type":"paper","branch":"CE","url":"https://drive.google.com/file/d/1AlNwVBxHi0CdVy3mH5lI0F3Lgbs_xd2e/view?usp=drivesdk","user":"Sanjay Vishnoi"},
+{"id":181,"title":"PYQ 2024","desc":"All Subjects (including OE)","sem":"4sem","subject":"All Subjects","type":"paper","branch":"CE","url":"https://drive.google.com/file/d/1vou03_vZAhpIW_LHDhtGe644E8W29Bub/view?usp=drivesdk","user":"Sanjay Vishnoi"},
+{"id":194,"title":"Rail Track Changing","desc":"","sem":"4sem","subject":"Transportation Engineering","type":"video","branch":"CE","url":"https://youtube.com/shorts/BwMXCpZ_444?feature=share","user":"Kapil Gupta"},
+{"id":195,"title":"Railway Track Sleepers Changing Method","desc":"","sem":"4sem","subject":"Transportation Engineering","type":"video","branch":"CE","url":"https://youtu.be/AkSTGQCd9u0","user":"Kapil Gupta"},
+{"id":265,"title":"PYQ 2025","desc":"ALL (Including OE)","sem":"5sem","subject":"ALL","type":"paper","branch":"CE","url":"https://drive.google.com/file/d/1Dg7iHB5Z2vyoV2Ewb0HrcGc0qJhXXYWa/view?usp=drivesdk","user":"Sanjay Vishnoi"},
+{"id":275,"title":"RCC All Solved PYQs","desc":"RCC Theory Design","sem":"5sem","subject":"RCC","type":"paper","branch":"CE","url":"https://drive.google.com/file/d/1YwnI5gl6zFUXsK2VZSGDrg_4YJ8H9cPx/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":279,"title":"Geotechnical Engineering","desc":"You-Tube","sem":"5sem","subject":"Geotechnical Engineering","type":"video","branch":"CE","url":"https://youtube.com/playlist?list=PLk7ptZcI9vmjkpCPUvp6IiqhC52lxKEwK","user":"VIJAY VERMA"},
+{"id":374,"title":"Environment Engineering 1","desc":"You-Tube","sem":"6sem","subject":"Environment Engineering 1","type":"video","branch":"CE","url":"https://youtube.com/playlist?list=PLk7ptZcI9vmhN5ck8sQXWgSh_3RHYQjr3","user":"VIJAY VERMA"},
+{"id":375,"title":"Estimation and Costing","desc":"You-Tube","sem":"6sem","subject":"Estimation","type":"video","branch":"CE","url":"https://youtube.com/playlist?list=PLZmv_MNQCMBi7gXQe_bGAFPlrfM7qlX47","user":"VIJAY VERMA"},
+{"id":376,"title":"OCF","desc":"You-Tube","sem":"6sem","subject":"OCF","type":"video","branch":"CE","url":"https://youtube.com/playlist?list=PLk7ptZcI9vmgzmCVSUW0qFG5502LDZuZU","user":"VIJAY VERMA"},
+{"id":479,"title":"Estimation and Costing","desc":"You-Tube","sem":"7sem","subject":"Estimation","type":"video","branch":"CE","url":"https://youtube.com/playlist?list=PLZmv_MNQCMBi7gXQe_bGAFPlrfM7qlX47","user":"VIJAY VERMA"},
+{"id":480,"title":"Hydrology","desc":"You-Tube","sem":"7sem","subject":"Hydrology","type":"video","branch":"CE","url":"https://youtube.com/playlist?list=PL9RcWoqXmzaJJhCtjG2WIHS4QFRzhLfk5","user":"VIJAY VERMA"},
+{"id":526,"title":"PYQs 2024","desc":"Previous Year Papers","sem":"8sem","subject":"All Subjects","type":"paper","branch":"CE","url":"https://drive.google.com/file/d/1ubVcefoWSa7Abd25_O2fMLIMysIYuPto/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":550,"title":"Complex Analysis","desc":"M3 Mathematics","sem":"M3","subject":"Mathematics","type":"video","branch":"CE","url":"https://youtube.com/playlist?list=PLU6SqdYcYsfI3sh-ho_iiTkCGsTbVh_Sw","user":"Deepak Awana"},
+{"id":551,"title":"Free E-Books","desc":"","sem":"3sem","subject":"Chemical","type":"book","branch":"CH","url":"https://sci-hub.mksa.top/","user":"Kapil Gupta"},
+{"id":552,"title":"NUMERICAL METHODS IN ENGINEERING AND SCIENCE","desc":"","sem":"3sem","subject":"Chemical","type":"book","branch":"CH","url":"https://drive.google.com/file/d/14ZWDHvN4r-nlUX-3DfOgxL_Zg2n31A_W/view","user":"Kapil Gupta"},
+{"id":553,"title":"Principles Of Mass Transfer And Seperation Processes","desc":"","sem":"3sem","subject":"Chemical","type":"book","branch":"CH","url":"https://drive.google.com/file/d/1V1NM5SXyXWBxtRLeQO-vTsBaCCfG750e/view","user":"Kapil Gupta"},
+{"id":554,"title":"Process Heat Transfer","desc":"","sem":"3sem","subject":"Chemical","type":"book","branch":"CH","url":"https://drive.google.com/file/d/1M9eUba7U-K0dHllDw1AE87VSre6oz85D/view","user":"Kapil Gupta"},
+{"id":555,"title":"Chemical Engineering Thermodynamics","desc":"M.C. Graw Hill Publications","sem":"3sem","subject":"Chemical Engineering Thermodynamics","type":"book","branch":"CH","url":"https://drive.google.com/file/d/1tNq8HS2KBpTRf9iqIzlVS-DjQJlcgZRG/view?usp=sharing","user":"Kapil Gupta"},
+{"id":556,"title":"Hydraulics And Fluid Mechanics","desc":"Chemical Engineering Modi & Seth","sem":"3sem","subject":"Fluid Mechanics","type":"book","branch":"CH","url":"https://drive.google.com/file/d/1cpRgS35I1NeaceDSoDacTIELKCNlZyuQ/view","user":"Kapil Gupta"},
+{"id":557,"title":"Fluid Mechanics And Hydraulic Machines","desc":"Chemical Engineering R.K. Bansal","sem":"3sem","subject":"Fluid Mechanics","type":"book","branch":"CH","url":"https://drive.google.com/file/d/1_lXD13xskwpRldFMpr9n-W8qHHmjYyOB/view","user":"Kapil Gupta"},
+{"id":558,"title":"CHEMICAL PRINCIPLES & CALCULATIONS","desc":"SEVENTH EDITION","sem":"3sem","subject":"Chemical","type":"book","branch":"CH","url":"https://drive.google.com/file/d/1CfuJe7-D6axLMgcAzrBKpzIk-hX3MD8E/view?usp=sharing","user":"Kapil Gupta"},
+{"id":613,"title":"Chemical Engineering Thermodynamics","desc":"","sem":"3sem","subject":"Chemical","type":"video","branch":"CH","url":"https://www.youtube.com/playlist?list=PLwdnzlV3ogoVnCnIfjDHng_8biZSUEYtK","user":"Kapil Gupta"},
+{"id":614,"title":"CONA","desc":"","sem":"3sem","subject":"Chemical","type":"video","branch":"CH","url":"https://www.youtube.com/playlist?list=PLU6SqdYcYsfIk1VhXxIYNPFU67ym6gae8","user":"Kapil Gupta"},
+{"id":666,"title":"Chemical Reaction Engineering","desc":"","sem":"5sem","subject":"Chemical","type":"book","branch":"CH","url":"https://drive.google.com/file/d/1YdMnmoYTRf_6qMdb5CKbnP_SDprcPral/view","user":"Kapil Gupta"},
+{"id":702,"title":"offline papers","desc":"","sem":"5sem","subject":"all subject","type":"paper","branch":"CH","url":"https://drive.google.com/file/d/1kmHdrv8cPolpKydIpFHNGCB6103gT26k/view?usp=share_link","user":"Priyanshi Dubey"},
+{"id":703,"title":"Prev. Year Papers","desc":"","sem":"5sem","subject":"Chemical","type":"paper","branch":"CH","url":"https://drive.google.com/file/d/1R9LTFEH2uxnWBP-ifFw0hpg2_5omXgJL/view","user":"Kapil Gupta"},
+{"id":714,"title":"CRE-2","desc":"6sem chemical reaction engineering","sem":"6sem","subject":"chemical reaction engineering","type":"book","branch":"CH","url":"https://drive.google.com/file/d/1hcdrkBE31Fd4OPrmnqkUAs5rqnfRBWj1/view?usp=drivesdk","user":"Priyanshi Dubey"},
+{"id":715,"title":"material science","desc":"6sem MS","sem":"6sem","subject":"MS","type":"book","branch":"CH","url":"https://drive.google.com/file/d/1hd_7WOlUq8EYeKFkr0oqQYRZQ5V17zno/view?usp=drivesdk","user":"Priyanshi Dubey"},
+{"id":721,"title":"Papers","desc":"","sem":"6sem","subject":"all subject","type":"paper","branch":"CH","url":"https://drive.google.com/file/d/1eEj0wk5l-soN_rM5LzU9PGD9k95cFwRn/view?usp=share_link","user":"Priyanshi Dubey"},
+{"id":722,"title":"PYQ","desc":"","sem":"6sem","subject":"all subject","type":"paper","branch":"CH","url":"https://drive.google.com/file/d/1dL6j8SJEY3zw7iw2lsz1QOd4wP1E8xKo/view?usp=drivesdk","user":"Priyanshi Dubey"},
+{"id":754,"title":"offline papers","desc":"","sem":"7sem","subject":"all sub.","type":"paper","branch":"CH","url":"https://drive.google.com/file/d/1G4BivdPqbPdeMWF8AxuUGMgaiHOk5NIK/view?usp=share_link","user":"Priyanshi Dubey"},
+{"id":755,"title":"7th sem 2023","desc":"Shekhar Saini","sem":"7sem","subject":"All Subjects (Chemical Engineering)","type":"paper","branch":"CH","url":"https://drive.google.com/file/d/1BNKkfUunk-tnaTidPjJc8cLNbyRtXeg7","user":"Chandra Shekhar"},
+{"id":771,"title":"Engineering Mathematics","desc":"B S Grewal","sem":"3sem","subject":"Engineering Mathematics","type":"book","branch":"CSE","url":"https://drive.google.com/file/d/1l8F3WmnDbrKeVH6qhLU_a6Oho2z3TKQF/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":772,"title":"C++ Notes For Professionals","desc":"","sem":"3sem","subject":"CSE","type":"book","branch":"CSE","url":"https://drive.google.com/file/d/18xE322LAdXM8rSYWsF8W9dNz5AoMyxRd/view","user":"Kapil Gupta"},
+{"id":773,"title":"Data Structures With C","desc":"","sem":"3sem","subject":"CSE","type":"book","branch":"CSE","url":"https://drive.google.com/file/d/133HopWzMyoFkkKfBIZaSU0KDvEl603vh/view","user":"Kapil Gupta"},
+{"id":774,"title":"Database System Concepts","desc":"","sem":"3sem","subject":"CSE","type":"book","branch":"CSE","url":"https://drive.google.com/file/d/1Xkf9XsBeGEvKC1I-IJMgJKEevVCRRqiE/view","user":"Kapil Gupta"},
+{"id":775,"title":"Discrete Mathematics And Its Applications","desc":"","sem":"3sem","subject":"CSE","type":"book","branch":"CSE","url":"https://drive.google.com/file/d/11DDoupqqqRFMp_4NjQdB3n4tEmqhHs9J/view","user":"Kapil Gupta"},
+{"id":786,"title":"DSA by Reema Thareja","desc":"DSA by Reema Thareja","sem":"3sem","subject":"Data Structures and Algorithms","type":"book","branch":"CSE","url":"https://drive.google.com/file/d/1m9u18GKXATqJFC8cOBNqEvI5lBhgw8eH/view?usp=sharing","user":"Samit Singhvi"},
+{"id":787,"title":"Modern Digital Electronics","desc":"Modern Digital Electronics digital circuits","sem":"3sem","subject":"Digital Logic Design","type":"book","branch":"CSE","url":"https://drive.google.com/file/d/1tDhMIZpYUPidiaym8VBJ9O2OH8T7wPdA","user":"Bharat Agrawal"},
+{"id":793,"title":"DSA","desc":"","sem":"3sem","subject":"Data Structure & Algorithm","type":"notes","branch":"CSE","url":"https://drive.google.com/file/d/1YT7BbUuy2ariaTMqfSXGrpSkuw6EmStz/view?usp=sharing","user":"Kapil Gupta"},
+{"id":800,"title":"PPCE","desc":"Professional Practice, Cyber Laws and Ethics","sem":"3sem","subject":"PPCE","type":"notes","branch":"CSE","url":"https://drive.google.com/file/d/1wpnEw0Wfbt7f9Ylq8EZBvEV2rzmlMnPW/view?usp=sharing","user":"Kapil Gupta"},
+{"id":801,"title":"Python Important","desc":"Python Important notes","sem":"3sem","subject":"Python","type":"notes","branch":"CSE","url":"https://drive.google.com/file/d/1cWm5Tq5tvmCSIJNoP8mrBB-HzErwr9jM/view?usp=drive_link","user":"Samit Singhvi"},
+{"id":803,"title":"offline papers CSE IT 2023","desc":"","sem":"3sem","subject":"All Subjects","type":"paper","branch":"CSE","url":"https://drive.google.com/file/d/1RBRlArghryUbJivjqYg8Tnixu8dn6hSU/view?usp=drivesdk","user":"Devraj Gurjar"},
+{"id":810,"title":"3rd Sem DSA Previous years' Papers","desc":"Data Structures and Algorithms","sem":"3sem","subject":"Data Structures and Algorithms","type":"paper","branch":"CSE","url":"https://drive.google.com/file/d/1MbFKm46dMNEHgsHCvaVlF60MoBARwVqq/view?usp=sharing","user":"Samit Singhvi"},
+{"id":811,"title":"Discrete Mathematics Online PYQ","desc":"Discrete Mathematics","sem":"3sem","subject":"Discrete Mathematics","type":"paper","branch":"CSE","url":"https://drive.google.com/file/d/1w_dzzgXajPMRR3T2OKq-PMwTOpioiXjj/view?usp=sharing","user":"Samit Singhvi"},
+{"id":816,"title":"DSA Online PYQ","desc":"DSA","sem":"3sem","subject":"DSA","type":"paper","branch":"CSE","url":"https://drive.google.com/file/d/1m6jlU1OCNkXRn8UshLjTRoVtgTPu2xic/view?usp=sharing","user":"Samit Singhvi"},
+{"id":861,"title":"Operating System Book Galvin","desc":"","sem":"5sem","subject":"Operating System","type":"book","branch":"CSE","url":"https://drive.google.com/file/d/1q6M1rWL27J6-MRytknyIpsqVS4AfwDFd/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":862,"title":"System Software: An Introduction to System Programming","desc":"","sem":"5sem","subject":"SSOS","type":"book","branch":"CSE","url":"https://drive.google.com/file/d/1yK6_1q7Ej5aHvYW8MWTr2OFBR_l4OjMU/view?usp=share_link","user":"Samit Singhvi"},
+{"id":865,"title":"Resources to prepare for Exam for CSE_IT","desc":"","sem":"5sem","subject":"All","type":"notes","branch":"CSE","url":"https://drive.google.com/file/d/19KhSUAOo3usPCXRBEvK_r6Gh3msZHVGl/view?usp=share_link","user":"Samit Singhvi"},
+{"id":866,"title":"Computer Network Notes","desc":"Computer Network Notes 5th sem","sem":"5sem","subject":"Computer Network","type":"notes","branch":"CSE","url":"https://drive.google.com/file/d/11vI173XT5fdOGYpNGUWYWBnvw7iWGMkd/view?usp=drivesdk","user":"Khush Purohit"},
+{"id":869,"title":"Java programming","desc":"Java programming last minute revision complete syllabus topic wise","sem":"5sem","subject":"java programming","type":"notes","branch":"CSE","url":"https://drive.google.com/file/d/1__cfF4CiQQGFqz8UGYOAA888C8jPZ2IA/view?usp=drivesdk","user":"Ajeet jain"},
+{"id":886,"title":"AI ML CSE 5th sem","desc":"PYQS","sem":"5sem","subject":"AIML","type":"paper","branch":"CSE","url":"https://drive.google.com/file/d/1RE1Q79Cp9dmecXOprxJ-I8WmrdH_CI0W/view?usp=drivesdk","user":"AARYAN CHOUDHARY"},
+{"id":887,"title":"CN Paper 2023","desc":"Question Paper of Computer Networks 2023","sem":"5sem","subject":"CN","type":"paper","branch":"CSE","url":"https://drive.google.com/file/d/1c1wFsxz3KR794PUNKpYcoCAMZn6M_szk/view?usp=share_link","user":"Samit Singhvi"},
+{"id":889,"title":"DAA Paper 2023","desc":"Question Paper of Design and Analysis of Algorithms 2023","sem":"5sem","subject":"DAA","type":"paper","branch":"CSE","url":"https://drive.google.com/file/d/1klYhuF-eonXgsHeGOvVJKjKALqnItdcF/view?usp=share_link","user":"Samit Singhvi"},
+{"id":890,"title":"SSOS Paper 2023","desc":"Question Paper of System Software and Operating System 2023","sem":"5sem","subject":"SSOS","type":"paper","branch":"CSE","url":"https://drive.google.com/file/d/1KMIxR0f6HtNMauTVhES2PXzeNG-dJGF9/view?usp=sharing","user":"Samit Singhvi"},
+{"id":891,"title":"TOC Paper 2023","desc":"Question Paper of Theory of Computation 2023","sem":"5sem","subject":"TOC","type":"paper","branch":"CSE","url":"https://drive.google.com/file/d/1CN1mW6QOiBs7dFIhhLfzbA0iGwnlwM0c/view?usp=share_link","user":"Samit Singhvi"},
+{"id":912,"title":"AI and ML Exam Paper 2023","desc":"AI and ML Paper 2023","sem":"6sem","subject":"Artificial intelligence and machine learning","type":"paper","branch":"CSE","url":"https://drive.google.com/file/d/1u9PUjDpRK39EDaUXtIU2RbZ9VrJWBWo-/view?usp=drive_link","user":"Samit Singhvi"},
+{"id":927,"title":"CSE 6th Sem 2025 Papers","desc":"PYQs","sem":"6sem","subject":"MWD, RES, CD, NLP, IP","type":"paper","branch":"CSE","url":"https://drive.google.com/file/d/1t-uR3abHRAlhGjmALYSsMBCMWovUfYy6","user":"Aashita Bhandari"},
+{"id":935,"title":"Resources Links for 7th Sem","desc":"Resources Links to prepare for subjects of 7th Sem","sem":"7sem","subject":"All Subjects","type":"notes","branch":"CSE","url":"https://drive.google.com/file/d/1nAhNIfxoAOoN94rZfK5z3dAick_TyNTG/view?usp=share_link","user":"Samit Singhvi"},
+{"id":936,"title":"Robotics Notes","desc":"Robotics Notes","sem":"7sem","subject":"All Subjects","type":"notes","branch":"CSE","url":"https://drive.google.com/file/d/16vhY9roicLrbKLNIpGGClY2qwiTuCYas/view?usp=share_link","user":"Samit Singhvi"},
+{"id":975,"title":"Previous Year Papers","desc":"","sem":"7sem","subject":"2023","type":"paper","branch":"CSE","url":"https://drive.google.com/file/d/1FeGtiYlyyEcaM3pg0tmKmD2ItIxt_nZZ/view?usp=drivesdk","user":"Kashish Agrawal"},
+{"id":976,"title":"PYQs 2024","desc":"All Subjects including Open Elective","sem":"7sem","subject":"All Subjects","type":"paper","branch":"CSE","url":"https://drive.google.com/file/d/1uId9is0j1p-Jq-yHjMVVW_a5CB3hclKj/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":986,"title":"Pulse and Linear Integrated Circuits","desc":"Pulse and Linear Integrated Circuits by Rajul Singhal","sem":"3sem","subject":"Digital Electronics - I","type":"book","branch":"ECC","url":"https://drive.google.com/drive/folders/1RFkRTge48KICQFgVT3Y4e0ZOA2Zc00Gi","user":"Aman Batodiya"},
+{"id":987,"title":"Network And Systems","desc":"Networks and Systems by Ashfaq Husain","sem":"3sem","subject":"Network Theory","type":"book","branch":"ECC","url":"https://drive.google.com/drive/folders/1JAkT12agL-Z1ycNaywnjJs39cw12dO4Z","user":"Aman Batodiya"},
+{"id":999,"title":"D.E. Notes","desc":"Digital Electronics Notes covering major chunk of syllabus","sem":"3sem","subject":"Digital Electronics - I","type":"notes","branch":"ECC","url":"https://drive.google.com/drive/folders/1K7QS0m78Msn7Ex6N94KsOFnM8Fhaz7Iz","user":"Aman Batodiya"},
+{"id":1015,"title":"PYQ 2025","desc":"","sem":"3sem","subject":"ALL","type":"paper","branch":"ECC","url":"https://drive.google.com/file/d/14-9BCGS27nyb2Z3Hkltl8evd20QlfvBF/view?usp=drivesdk","user":"Sanjay Vishnoi"},
+{"id":1016,"title":"Offline Theory papers 2023","desc":"theory papers","sem":"3sem","subject":"All subjects","type":"paper","branch":"ECC","url":"https://drive.google.com/file/d/1j8q3vjGgQ62BGjJ3PJh2ucSXI9UPehER/view?usp=drivesdk","user":"bharat jangid"},
+{"id":1017,"title":"ECC 3RD SEM PYQ'S 2024-25","desc":"ECC 3RD SEM PYQ'S 2024_25","sem":"3sem","subject":"ALL SUBJECTS","type":"paper","branch":"ECC","url":"https://drive.google.com/file/d/15tW7OBnhBVxRa9rQEbuZHGb_vfDx-rc5/view?usp=drivesdk","user":"VIKAS"},
+{"id":1027,"title":"CMOS Digital Integrated Circuits","desc":"Analysis & Design","sem":"4sem","subject":"Electronics","type":"book","branch":"ECC","url":"https://drive.google.com/file/d/1BKyVBrXiheuEHb72ic71Qs0eEw76-OYt/view?usp=sharing","user":"Kapil Gupta"},
+{"id":1073,"title":"Digital Logic And Computer Design","desc":"","sem":"5sem","subject":"ECC","type":"book","branch":"ECC","url":"https://drive.google.com/file/d/1VRZLBQs47QYnEpJIvy19n5fFk5v3X9WV/view","user":"Kapil Gupta"},
+{"id":1074,"title":"Microprocessors Tutorial","desc":"","sem":"5sem","subject":"ECC","type":"book","branch":"ECC","url":"https://drive.google.com/file/d/1VQVpusPdAjA0oox7wUow-GqV_DVdkFpP/view","user":"Kapil Gupta"},
+{"id":1075,"title":"Power Electronics","desc":"","sem":"5sem","subject":"ECC","type":"book","branch":"ECC","url":"https://drive.google.com/file/d/1XcTg0SG-X7lx-Cgv82rtih-OREI7mJAK/view","user":"Kapil Gupta"},
+{"id":1240,"title":"Advance Communication System","desc":"7th sem PYQ (ecc/ eee / ec)","sem":"7sem","subject":"2024 PYQ","type":"paper","branch":"ECC","url":"https://drive.google.com/file/d/1DAuj6zNImaqYxfqc33kvFyGKqoyj9f9S","user":"Ritesh Parashar"},
+{"id":1245,"title":"ECC 7th sem PYQ","desc":"","sem":"7sem","subject":"Previous Year Question Papers","type":"paper","branch":"ECC","url":"https://drive.google.com/file/d/1txb4SNdmtDBL_5_uQJKMfLam0DUjCp1Q/view?usp=drivesdk","user":"Kashish"},
+{"id":1246,"title":"ECC 8th sem","desc":"ECC 8th sem","sem":"8sem","subject":"All","type":"file","branch":"ECC","url":"https://drive.google.com/file/d/16LOHmWyvzY_jYKGrVGYhClgy1SHNTyzg","user":"Raghav Ramdev"},
+{"id":1247,"title":"Engineering Mathematics","desc":"B S Grewal","sem":"3sem","subject":"Engineering Mathematics","type":"book","branch":"ECE","url":"https://drive.google.com/file/d/1l8F3WmnDbrKeVH6qhLU_a6Oho2z3TKQF/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":1248,"title":"Digital Logic And Computer Design","desc":"","sem":"3sem","subject":"ECE","type":"book","branch":"ECE","url":"https://drive.google.com/file/d/1-Imn2n44S8J7Rwdcdmxd70nbRohLpSeZ/view","user":"Kapil Gupta"},
+{"id":1256,"title":"Networks and Systems","desc":"Networks and Systems by Ashfaq Husain","sem":"3sem","subject":"Network Theory","type":"book","branch":"ECE","url":"https://drive.google.com/drive/folders/1JAkT12agL-Z1ycNaywnjJs39cw12dO4Z","user":"Aman Batodiya"},
+{"id":1262,"title":"Sampling gates","desc":"","sem":"3sem","subject":"DE","type":"notes","branch":"ECE","url":"https://drive.google.com/file/d/1eh5pE761wT7S0prJH3h7fmQ6ocyb0hKl/view?usp=drivesdk","user":"DEEPAK AWANA"},
+{"id":1263,"title":"D. E. Notes","desc":"Digital Electronics - I notes covering majority chunk of syllabus","sem":"3sem","subject":"Digital Electronics - I","type":"notes","branch":"ECE","url":"https://drive.google.com/drive/folders/1K7QS0m78Msn7Ex6N94KsOFnM8Fhaz7Iz","user":"Aman Batodiya"},
+{"id":1286,"title":"Advanced Engineering Mathematics","desc":"3rd sem online paper","sem":"3sem","subject":"Advanced Engineering Mathematics","type":"paper","branch":"ECE","url":"https://drive.google.com/file/d/1635mfa2kq0oexQS4x-2kLMVXkbzE4IO5/view?usp=sharing","user":"Kashish"},
+{"id":1287,"title":"3rd sem 2025 ECE PYQ","desc":"PYQs","sem":"3sem","subject":"all","type":"paper","branch":"ECE","url":"https://drive.google.com/file/d/1-2ltZujxrUWPiu5PQzw65yBBXIvozOW9/view?usp=drivesdk","user":"punit patel"},
+{"id":1288,"title":"MID TERM PAPER IIISEM","desc":"","sem":"3sem","subject":"All Subjects","type":"paper","branch":"ECE","url":"https://drive.google.com/file/d/1pBHRYBi1AYnYZZUCMKUnp3qv-AFoJNHX/view?usp=drivesdk","user":"Deepak Awana"},
+{"id":1295,"title":"NT PYQ SOLUTIONS","desc":"","sem":"3sem","subject":"NETWORK THEORY","type":"paper","branch":"ECE","url":"https://drive.google.com/file/d/1hLsCAhhcnUG2NfE9ygmjfSSAgsFCDzoe/view?usp=drivesdk","user":"Deepak Awana"},
+{"id":1296,"title":"ECE 3 SEM PYQ 2024","desc":"Set of 2024 PYQs","sem":"3sem","subject":"PYQ","type":"paper","branch":"ECE","url":"https://drive.google.com/file/d/1mPIhjPs40-cxN-tYvRvshx5Q_gzaXKIu/view?usp=drivesdk","user":"Deepak Awana"},
+{"id":1297,"title":"BJT BASICS AND AMPLIFIER","desc":"","sem":"3sem","subject":"Electronic Circuits","type":"video","branch":"ECE","url":"https://youtube.com/playlist?list=PL-IC1WV1OE4mUCq1VSqjgVM7KMTitVcSy","user":"DEEPAK AWANA"},
+{"id":1298,"title":"Graph theory","desc":"","sem":"3sem","subject":"Network Theory","type":"video","branch":"ECE","url":"https://youtu.be/OIm6PGD5iC8?si=x_Nc6FPJgehw5zfv","user":"DEEPAK AWANA"},
+{"id":1456,"title":"6th Sem Offline PYQ 2023","desc":"","sem":"6sem","subject":"Offline PYQ","type":"paper","branch":"ECE","url":"https://drive.google.com/file/d/1Lq9edsY0VJJrqIoZMX7pF3E023Lj8WF0/view?usp=drivesdk","user":"Kashish"},
+{"id":1475,"title":"7th sem PYQ 2023","desc":"","sem":"7sem","subject":"Previous Year Questions","type":"paper","branch":"ECE","url":"https://drive.google.com/file/d/1OMaScXRRlR5cw5UwaJxbTqMtieZEx5Wt/view?usp=drivesdk","user":"Kashish"},
+{"id":1476,"title":"Engineering Mathematics","desc":"B S Grewal","sem":"3sem","subject":"Engineering Mathematics","type":"book","branch":"EE","url":"https://drive.google.com/file/d/1l8F3WmnDbrKeVH6qhLU_a6Oho2z3TKQF/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":1477,"title":"Networks and Systems","desc":"Ashfaq Hussain, Networks and Systems","sem":"3sem","subject":"ECT","type":"book","branch":"EE","url":"https://drive.google.com/file/d/1TWrNzsP2RHruxGWkctxKP3fiMJk13O5H/view?usp=drivesdk","user":"Ajay Jajoriya"},
+{"id":1479,"title":"Electric Machines","desc":"","sem":"3sem","subject":"Electric Machines","type":"book","branch":"EE","url":"https://drive.google.com/file/d/1rb_0PW2Ps1h6DXojwD1PzN7zPuTkwhkv/view","user":"Kapil Gupta"},
+{"id":1480,"title":"Electric Power Generation,Transmission And Distribution","desc":"","sem":"3sem","subject":"Electrical Engineering","type":"book","branch":"EE","url":"https://drive.google.com/file/d/1UbYabuW8UQARhG2ui40-dvFZMQ4gJO7Z/view","user":"Kapil Gupta"},
+{"id":1551,"title":"EE theory papers 2023","desc":"Theory papers","sem":"3sem","subject":"All subjects","type":"paper","branch":"EE","url":"https://drive.google.com/file/d/1U_YsmEg-LjYd87B_Jsv7D7jeqYhSIzno/view?usp=share_link","user":"bharat jangid"},
+{"id":1552,"title":"Midterm1 paper","desc":"3rd sem Midterm 1 all papers","sem":"3sem","subject":"All subjects","type":"paper","branch":"EE","url":"https://drive.google.com/drive/folders/1G2SBgaekn4TT7HyU-urxWC8aWjQy5sRQ","user":"Anirudh Sharma"},
+{"id":1609,"title":"Offline Theory PYQ 2023","desc":"","sem":"4sem","subject":"All Subjects","type":"paper","branch":"EE","url":"https://drive.google.com/file/d/1-RHSX9dUtVCVMfYnh6t9fRa0V0Tr1-_z/view?usp=drivesdk","user":"Bharat Seervi"},
+{"id":1674,"title":"EE All Papers","desc":"","sem":"5sem","subject":"All Offline Paper 5th sem","type":"paper","branch":"EE","url":"https://drive.google.com/file/d/1E6YWo6slPKEhBS22nzneRhbTHpKUL8cG/view?usp=drivesdk","user":"Priya Balundiya"},
+{"id":1675,"title":"Offline Papers 2023","desc":"","sem":"5sem","subject":"All subjects","type":"paper","branch":"EE","url":"https://drive.google.com/file/d/1QqKTMHhi95eWaPyVYcHsZpAm5Wd-9Xvs/view?usp=drivesdk","user":"Priya Balundiya"},
+{"id":1700,"title":"VI Sem All Papers","desc":"","sem":"6sem","subject":"All subjects","type":"paper","branch":"EE","url":"https://drive.google.com/drive/folders/1kJ4tczRv_-TrBHE2D3dm5u7Iiq6ZlhaR","user":"Priya Balundiya"},
+{"id":1729,"title":"Mid term Papers","desc":"Both mid term papers","sem":"7sem","subject":"All subjects","type":"paper","branch":"EE","url":"https://drive.google.com/file/d/1P4ydO9oCGRvCtiJOAVZP23PiAkfqjHME/view?usp=drivesdk","user":"Priya Balundiya"},
+{"id":1748,"title":"All Papers","desc":"","sem":"8sem","subject":"Offline Papers 2023","type":"paper","branch":"EE","url":"https://drive.google.com/file/d/1GuSOz93rPeK2QQHxy629fu4-kdA8w5Ac/view?usp=drivesdk","user":"Priya Balundiya"},
+{"id":1750,"title":"Analog And Digital Electronics","desc":"","sem":"3sem","subject":"EEE","type":"book","branch":"EEE","url":"https://drive.google.com/file/d/1Ceu--aI8Q6l0crYxUe29tIIHuD7pLUmc/view","user":"Kapil Gupta"},
+{"id":1756,"title":"Networks and Systems","desc":"Networks and Systems by Ashfaq Husain","sem":"3sem","subject":"Network Theory","type":"book","branch":"EEE","url":"https://drive.google.com/drive/folders/1GdH8iOzQQN0iw79IGHtMNPGEvgwRsItr","user":"Aman Batodiya"},
+{"id":1784,"title":"Offline Theory paper III Sem","desc":"","sem":"3sem","subject":"ALL SUBJECTS","type":"paper","branch":"EEE","url":"https://drive.google.com/file/d/1P_fUnDO84wWx5acZof3N1O39u5f3x16t/view?usp=drivesdk","user":"Anisha Harsh"},
+{"id":1785,"title":"Offline Theory papers 2023","desc":"theory papers offline","sem":"3sem","subject":"All subjects","type":"paper","branch":"EEE","url":"https://drive.google.com/file/d/1-esKPX35dTP5xh1duXjaU9h_OQrg6_ka/view?usp=drivesdk","user":"bharat jangid"},
+{"id":1787,"title":"EEE PYQs (2016-2024)","desc":"Previous year questions","sem":"3sem","subject":"PYQ","type":"paper","branch":"EEE","url":"https://drive.google.com/file/d/175mi92-9penLoZiCfshiFMbvoDE6YVIo/view?usp=drivesdk","user":"Sudarshan Chauhan"},
+{"id":1808,"title":"Offline theory pyq 2023","desc":"","sem":"4sem","subject":"All Subjects","type":"paper","branch":"EEE","url":"https://drive.google.com/file/d/1-KKQ5E3fZyX227xMLVYRAPyobDp3cC9H/view?usp=drivesdk","user":"Anisha Harsh"},
+{"id":1864,"title":"AC machine","desc":"","sem":"5sem","subject":"AC machine","type":"paper","branch":"EEE","url":"https://drive.google.com/file/d/1ctkzf_owVUEagExINWaMxClnAa0KdUzx/view?usp=drivesdk","user":"Priyanshi Dubey"},
+{"id":1865,"title":"AC Machines pyq 2023","desc":"","sem":"5sem","subject":"Alternating Current Machines","type":"paper","branch":"EEE","url":"https://drive.google.com/file/d/19bKk0ulQS5JuwA48YKlwt4iQZOnrIiWo/view?usp=drivesdk","user":"Kashish"},
+{"id":1890,"title":"6TH SEM PAPERS","desc":"PYQs","sem":"6sem","subject":"All subjects","type":"paper","branch":"EEE","url":"https://drive.google.com/file/d/1lMQGpkVqawzR9K_XfBfIb_ui9ecL5BZd","user":"Harsh Chouhan"},
+{"id":1902,"title":"Offline pyq all subjects","desc":"","sem":"7sem","subject":"Electrical And Electronics","type":"paper","branch":"EEE","url":"https://drive.google.com/file/d/19CoRXBCHD0AE4uCR-vVzaao7BIks9j95/view?usp=drivesdk","user":"Kashish"},
+{"id":1903,"title":"DSA by Reema Thareja","desc":"DSA by Reema Thareja","sem":"3sem","subject":"Data Structures and Algorithms","type":"book","branch":"IT","url":"https://drive.google.com/file/d/1m9u18GKXATqJFC8cOBNqEvI5lBhgw8eH/view?usp=sharing","user":"Samit Singhvi"},
+{"id":1929,"title":"Python Important","desc":"Python Important notes","sem":"3sem","subject":"Python","type":"notes","branch":"IT","url":"https://drive.google.com/file/d/1cWm5Tq5tvmCSIJNoP8mrBB-HzErwr9jM/view?usp=drive_link","user":"Samit Singhvi"},
+{"id":1930,"title":"offline papers CSE IT 2023","desc":"","sem":"3sem","subject":"All Subjects","type":"paper","branch":"IT","url":"https://drive.google.com/file/d/1RBRlArghryUbJivjqYg8Tnixu8dn6hSU/view?usp=drivesdk","user":"Devraj Gurjar"},
+{"id":1934,"title":"Discrete Mathematics Online PYQ","desc":"Discrete Mathematics","sem":"3sem","subject":"Discrete Mathematics","type":"paper","branch":"IT","url":"https://drive.google.com/file/d/1w_dzzgXajPMRR3T2OKq-PMwTOpioiXjj/view?usp=sharing","user":"Samit Singhvi"},
+{"id":1937,"title":"DSA Online PYQ","desc":"DSA","sem":"3sem","subject":"DSA","type":"paper","branch":"IT","url":"https://drive.google.com/file/d/1m6jlU1OCNkXRn8UshLjTRoVtgTPu2xic/view?usp=sharing","user":"Samit Singhvi"},
+{"id":1983,"title":"Resources to prepare for Exam for CSE_IT","desc":"","sem":"5sem","subject":"All","type":"notes","branch":"IT","url":"https://drive.google.com/file/d/19KhSUAOo3usPCXRBEvK_r6Gh3msZHVGl/view?usp=share_link","user":"Samit Singhvi"},
+{"id":1987,"title":"Offline Theory Paper 2024","desc":"","sem":"5sem","subject":"All Subject","type":"paper","branch":"IT","url":"https://drive.google.com/file/d/1uId9is0j1p-Jq-yHjMVVW_a5CB3hclKj/view?usp=drivesdk","user":"Bharat Seervi"},
+{"id":2002,"title":"AI and ML Exam Paper 2023","desc":"AI and ML Paper 2023","sem":"6sem","subject":"Artificial intelligence and machine learning","type":"paper","branch":"IT","url":"https://drive.google.com/file/d/1u9PUjDpRK39EDaUXtIU2RbZ9VrJWBWo-/view?usp=drive_link","user":"Samit Singhvi"},
+{"id":2019,"title":"Database System Concepts","desc":"","sem":"7sem","subject":"Information Technology","type":"book","branch":"IT","url":"https://drive.google.com/file/d/1_gz83zyMoxshKuEkTKrtTOSkjgAuiSIW/view?usp=drivesdk","user":"Kashish Agrawal"},
+{"id":2051,"title":"Previous Year Papers","desc":"","sem":"7sem","subject":"2023","type":"paper","branch":"IT","url":"https://drive.google.com/file/d/1FeGtiYlyyEcaM3pg0tmKmD2ItIxt_nZZ/view?usp=drivesdk","user":"Kashish Agrawal"},
+{"id":2052,"title":"PYQ 2024","desc":"PYQ OF 2024","sem":"8sem","subject":"All Subjects","type":"paper","branch":"IT","url":"https://drive.google.com/file/d/1YUiN2mEs2qbn89AoBVCybnKOTO3op-m9","user":"Chandra Prakash goyal"},
+{"id":2058,"title":"MECHANICS OF SOLIDS","desc":"B.C. Punmia","sem":"3sem","subject":"Mechanics of Solid","type":"book","branch":"ME","url":"https://drive.google.com/file/d/1SWwOqR1A_NitDEVecwfo8s9kSB204xG4/view","user":"Kapil Gupta"},
+{"id":2059,"title":"Mechanical Measurements & Instrumentation","desc":"D S Kumar","sem":"3sem","subject":"Measurement","type":"book","branch":"ME","url":"https://drive.google.com/file/d/1yu_3ldHRItCxJByX62TGgNYKTT-GUalk/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":2060,"title":"Baisc & Applied Thermodynamics","desc":"P.K. Nag","sem":"3sem","subject":"Thermodynamics","type":"book","branch":"ME","url":"https://drive.google.com/file/d/1FqopzXp3yYhiIFbeRvYBltO4kkl3Yo3R/view","user":"Kapil Gupta"},
+{"id":2062,"title":"Engineering Thermodynamics","desc":"Yunus A Cengel","sem":"3sem","subject":"Thermodynamics","type":"book","branch":"ME","url":"https://drive.google.com/file/d/1kzGNK9Unms3FJYQ373WFoshZlPer8iH-/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":2079,"title":"Mechanics of Solid (MOS) Notes","desc":"It contains all the notes","sem":"3sem","subject":"MOS Notes","type":"notes","branch":"ME","url":"https://drive.google.com/folderview?id=1xzl1NUqKxAOntAJgm3zF-Vlf7Id58QM6","user":"Kapil Gupta"},
+{"id":2081,"title":"Thermodynamics Notes","desc":"Mechanical III Sem Notes","sem":"3sem","subject":"Thermodynamics - III Sem Notes","type":"notes","branch":"ME","url":"https://drive.google.com/drive/folders/1jXcNKfi5HW1mT1bPOoV6S1AjIgKHuJhe?usp=sharing","user":"Kapil Gupta"},
+{"id":2082,"title":"offline PYQ 2023","desc":"","sem":"3sem","subject":"All Subjects","type":"paper","branch":"ME","url":"https://drive.google.com/file/d/1-nCdosd1bJD4NYe9r4bnCvTnabRWd0Ep/view?usp=drivesdk","user":"Devraj Gurjar"},
+{"id":2083,"title":"All Year PYQs","desc":"Mechanical 3rd SEM","sem":"3sem","subject":"All Subjects Mech 3rd SEM","type":"paper","branch":"ME","url":"https://drive.google.com/file/d/1keVfJFBZ8LJgzsQ3O-zvyNu8HvExzxnH/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":2221,"title":"ME V: Mid Term - 1 (2022)","desc":"","sem":"5sem","subject":"All Papers","type":"paper","branch":"ME","url":"https://drive.google.com/file/d/1Us_wGPdVcqOKuiLvVuZTwVCdkaCarDL6/view?usp=sharing","user":"Zahid Khan"},
+{"id":2222,"title":"All Subjects - Offline Papers","desc":"Last five year papers are available of all subjects","sem":"5sem","subject":"ME V Sem - Offline Papers","type":"paper","branch":"ME","url":"https://drive.google.com/file/d/13yHxBwfgDHl_AW3I2RWKP55rpJv8dG-8/view?usp=drivesdk","user":"Khush Purohit"},
+{"id":2223,"title":"ME V: Final Exams 2023","desc":"","sem":"5sem","subject":"Mechanical","type":"paper","branch":"ME","url":"https://drive.google.com/file/d/1CtYc0TvJaY_PCuKEFr40fWTND6i1nitu/view?usp=sharing","user":"Zahid Khan"},
+{"id":2360,"title":"Previous year papers","desc":"Mechanical VII sem Past year Papers","sem":"7sem","subject":"All Subjects","type":"paper","branch":"ME","url":"https://drive.google.com/file/d/1Pt6UQ3BnYHMh40jwXZ5xDcj4v44xZzDz/view?usp=sharing","user":"Zahid Khan"},
+{"id":2418,"title":"Mining Technology","desc":"D.J. Deshmukh","sem":"3sem","subject":"Mining Technology","type":"book","branch":"MI","url":"https://drive.google.com/file/d/1W84tYMEiW0u5YxsfivoRqONAAGMn4Me4/view?usp=sharing","user":"Kapil Gupta"},
+{"id":2419,"title":"Prospecting and Exploration Book","desc":"","sem":"3sem","subject":"DMD","type":"book","branch":"MI","url":"https://drive.google.com/file/d/1-fx3xR_2ovypjcsdb02K8TkDVpxKaGes/view?usp=drivesdk","user":"Vaibhav Soni"},
+{"id":2420,"title":"Elements Of Mining","desc":"","sem":"3sem","subject":"Geology","type":"book","branch":"MI","url":"https://drive.google.com/file/d/17pQSuiz0NM5KtOQSoPk9iE2Iu4mMgB6S/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":2421,"title":"Engineering Geology","desc":"K M Bangur","sem":"3sem","subject":"Engineering Geology","type":"book","branch":"MI","url":"https://drive.google.com/file/d/1mHYTGwyn-V8gn7TXWpN0cYP7Wd_hUUE4/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":2474,"title":"PYQ_3rd sem_2nd year_2025_ Mining","desc":"PYQs 2025","sem":"3sem","subject":"ALL","type":"paper","branch":"MI","url":"https://drive.google.com/file/d/1eHBodA-e7VfE5XaeXf6B5rBTYykFTqCX","user":"Rohit choudhary"},
+{"id":2475,"title":"2023 all subjects pyq","desc":"","sem":"3sem","subject":"All Subjects","type":"paper","branch":"MI","url":"https://drive.google.com/file/d/1-8JTLKFKy3b1luhPvHOF5lIS7wp4t82M/view?usp=drivesdk","user":"Devraj Gurjar"},
+{"id":2476,"title":"2024 PYQ","desc":"2nd year 3rd SEM 2024 examination pyq","sem":"3sem","subject":"All Subjects","type":"paper","branch":"MI","url":"https://drive.google.com/file/d/1-B5MMqoB4Hf_ZFc1UDykwJ7gpGee1NfB/view?usp=drivesdk","user":"Vaibhav Soni"},
+{"id":2477,"title":"Offline papers mining 2023","desc":"","sem":"3sem","subject":"All Subjects","type":"paper","branch":"MI","url":"https://drive.google.com/file/d/1RT7g5hHtD3Ep_0Pe0vo1G_aWVbScNzvS/view?usp=drivesdk","user":"Devraj Gurjar"},
+{"id":2509,"title":"PYQs 2024","desc":"all subject 2024 papers","sem":"4sem","subject":"all","type":"paper","branch":"MI","url":"https://1drv.ms/b/c/98b50c5665a1f37e/EfrsD68LEb5Km-z-_rHCBM4B1a5nAtF33BWItj227m3R","user":"Ram lakhan"},
+{"id":2519,"title":"Ch-Board and Pillar method of mining","desc":"","sem":"5sem","subject":"Mining","type":"book","branch":"MI","url":"https://drive.google.com/file/d/1yRKWmTKtEoVvrQq7u1QsAc_KbJERvrIl/view?usp=drivesdk","user":"Priya Balundiya"},
+{"id":2536,"title":"PYQs 2024","desc":"all subject 2024 papers","sem":"5sem","subject":"all","type":"paper","branch":"MI","url":"https://1drv.ms/b/c/98b50c5665a1f37e/Eb9QLO8iOs1HkqTA0ewbUxQBwKzxkPfHcY4jOnaj2PG","user":"Lakhan Choudhary"},
+{"id":2538,"title":"Offline Theory Paper 2024","desc":"","sem":"5sem","subject":"All Subjects","type":"paper","branch":"MI","url":"https://drive.google.com/file/d/1uoUF0rDZDnMvgM6bSM1LSQWJj-jb3bl0/view?usp=drivesdk","user":"Bharat Seervi"},
+{"id":2541,"title":"All Papers","desc":"Mining branch exam papers 2023","sem":"5sem","subject":"Mining","type":"paper","branch":"MI","url":"https://drive.google.com/file/d/1BkVvVnA3BoUiq-pu0Q64uw-cKXuTQ855/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":2577,"title":"Rock Fragmentation","desc":"MI 405-A Sushil Bhandari","sem":"7sem","subject":"Rock Fragmentation Engineering","type":"book","branch":"MI","url":"https://drive.google.com/file/d/1cCtBWyga_cBoud_G538C6p-CaSpV_73N/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":2623,"title":"PYQ","desc":"Previous year Papers","sem":"7sem","subject":"All subjects","type":"paper","branch":"MI","url":"https://drive.google.com/drive/folders/1HexaTAHyFFpogfVPlvGtne2hatMO2Gtt","user":"Priya Balundiya"},
+{"id":2640,"title":"8th sem paper 2","desc":"2019","sem":"8sem","subject":"all","type":"paper","branch":"MI","url":"https://drive.google.com/file/d/1ug7QF0cMZOCpFZsgdBNZeelda9vAR_vA/view?usp=drivesdk","user":"Divyanshu Maken"},
+{"id":2641,"title":"8th SEM PYQs Mining","desc":"Previous Year Papers","sem":"8sem","subject":"Mining All Subjects","type":"paper","branch":"MI","url":"https://drive.google.com/file/d/1ug7QF0cMZOCpFZsgdBNZeelda9vAR_vA/view?usp=drivesdk","user":"Divyanshu Maken"},
+{"id":2644,"title":"Higher Engineering Mathematics","desc":"Dr B S Grewal","sem":"3sem","subject":"Mathematics","type":"book","branch":"P&I","url":"https://drive.google.com/file/d/1l8F3WmnDbrKeVH6qhLU_a6Oho2z3TKQF/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":2645,"title":"Higher Engineering Mathematics","desc":"H.K. Das","sem":"3sem","subject":"Mathematics","type":"book","branch":"P&I","url":"https://drive.google.com/file/d/1kWvRNAyCmLxg8FMPJlH5SQ-IkWnMeKYA/view","user":"Kapil Gupta"},
+{"id":2646,"title":"Industrial Engineering & Management","desc":"O P Khanna","sem":"3sem","subject":"Industrial Engineering","type":"book","branch":"P&I","url":"https://drive.google.com/file/d/1l4KblxEsXR2dNqOXMcD3p4vzIWNASLBK/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":2671,"title":"Previous Year Papers","desc":"","sem":"3sem","subject":"P&I","type":"paper","branch":"P&I","url":"https://drive.google.com/drive/folders/1ktK01ueyl0lmEqALksZrFfCP9mRqY8n-","user":"Kapil Gupta"},
+{"id":2734,"title":"PI PYQ 2023","desc":"","sem":"5sem","subject":"PI PYQ 2023","type":"paper","branch":"P&I","url":"https://drive.google.com/file/d/10Nf0Yy7ZTXDr-yZTSIz0STXw1f9rwzy1/view?usp=drivesdk","user":"kanishka Ramawat"},
+{"id":2771,"title":"3 Sem Papers","desc":"","sem":"3sem","subject":"All Subjects","type":"paper","branch":"PE","url":"https://acrobat.adobe.com/link/track?uri=urn:aaid:scds:US:a592f075-d6c3-4270-8026-68c40c2aa0P","user":"Abhishek Kumar"},
+{"id":2772,"title":"PE: Offline papers 2023","desc":"","sem":"3sem","subject":"All Subjects","type":"paper","branch":"PE","url":"https://drive.google.com/file/d/112MCiPqKrDCi95lI3Xrou16VWeGneJRX/view?usp=drivesdk","user":"Devraj Gurjar"},
+{"id":2775,"title":"Drilling Technology - I","desc":"","sem":"3sem","subject":"PYQs","type":"paper","branch":"PE","url":"https://drive.google.com/file/d/1Ik0Pa4aDMYYTZx4cA1yy4ON9eXkk0XSc","user":"Navyansh Roop Rai"},
+{"id":2776,"title":"Geotechnical Engineering","desc":"","sem":"4sem","subject":"Soil Mechanics","type":"book","branch":"PE","url":"https://drive.google.com/file/d/1Z-eJ7EGhqzwrX27YdbzmHcvqtN1UCHES","user":"Jeev Raj Singh Rathore"},
+{"id":2797,"title":"PE 301A production Engineering Book.pdf","desc":"","sem":"5sem","subject":"PE 301A production Engineering.pdf","type":"book","branch":"PE","url":"https://drive.google.com/file/d/10UyfOZ85bHcr5k-DtD478lBrYTRdSVdU/view?usp=drivesdk","user":"kanishka Ramawat"},
+{"id":2825,"title":"Health And Safety HSE","desc":"HSE complete full course Notes by Kovid Chouhan","sem":"7sem","subject":"Health Safety","type":"notes","branch":"PE","url":"https://drive.google.com/file/d/11rab4KEeMT6zDCeyp2Kd2XdpiiuR5tQH","user":"Kovid Chouhan"},
+{"id":2829,"title":"BC Punmia","desc":"BC Punmia Civil engineering","sem":"civilsem","subject":"Basic Civil Engineering","type":"book","branch":"civilsem","url":"https://drive.google.com/file/d/1MJZzb5HYLMannu2luwf1Et6235HrItCY/view?usp=drivesdk","user":"Khush Purohit"},
+{"id":2830,"title":"Ashfaq Husain Book","desc":"","sem":"civilsem","subject":"Basic Electrical Engineering","type":"book","branch":"civilsem","url":"https://drive.google.com/file/d/11dp97jwHenYh68FaU7y_vLqQnS9gCo9e/view","user":"Kapil Gupta"},
+{"id":2834,"title":"Engineering Chemistry Book (Jain & Jain)","desc":"","sem":"civilsem","subject":"Engineering Chemistry","type":"book","branch":"civilsem","url":"https://drive.google.com/file/d/1IpaT53ego7JomNeTnd27rHq_-6avam90/view","user":"Kapil Gupta"},
+{"id":2835,"title":"N.D. BHATT","desc":"","sem":"civilsem","subject":"Engineering Graphics","type":"book","branch":"civilsem","url":"https://drive.google.com/file/d/1-WydWLwkOIEMcF65iKIF669FZTwVkYZR/view","user":"Kapil Gupta"},
+{"id":2844,"title":"All Subject viva questions","desc":"for civil sem","sem":"civilsem","subject":"all Subject civil sem","type":"file","branch":"civilsem","url":"https://drive.google.com/file/d/1kQW6VqC9kTmhTQMbuZk270zfruHrjn5d/view?usp=drivesdk","user":"Devraj Gurjar"},
+{"id":2889,"title":"First year civil sem","desc":"all material of civil sem first year","sem":"civilsem","subject":"all subjects","type":"notes","branch":"civilsem","url":"https://t.me/civilsemNotesFiles","user":"Ajeet jain"},
+{"id":2944,"title":"Previous Year paper 2024","desc":"","sem":"civilsem","subject":"All papers 2024","type":"paper","branch":"civilsem","url":"https://drive.google.com/file/d/1auDgThfHgqkgUbnweA1hNFN4gqFnSUVI","user":"Sunil Kumar"},
+{"id":2945,"title":"PYQs 2025 Civil SEM","desc":"papers of mid term and sem exams batch 2025","sem":"civilsem","subject":"All papers of civil sem","type":"paper","branch":"civilsem","url":"https://drive.google.com/file/d/1d28ApduCTD4i8ZNd0SanEJCBOvutgN6n/view?usp=drivesdk","user":"Harshita Sen"},
+{"id":2946,"title":"2022 Online Paper","desc":"Exam MCQ Questions in Chemistry","sem":"civilsem","subject":"All Subjects","type":"paper","branch":"civilsem","url":"https://drive.google.com/drive/folders/1Z_J67p21G4ztjRL2rixs4Dxp9tsV_g41?usp=drive_link","user":"Anushka Mathur"},
+{"id":2955,"title":"Online Papers 2021","desc":"","sem":"civilsem","subject":"Online Exam","type":"paper","branch":"civilsem","url":"https://mbmec.weebly.com/2020-online-papers.html","user":"Kapil Gupta"},
+{"id":2956,"title":"CIVIL SEM PAPERS","desc":"","sem":"civilsem","subject":"Previous Year Papers","type":"paper","branch":"civilsem","url":"https://mbmec.weebly.com/civil-sem-paper.html","user":"Kapil Gupta"},
+{"id":2957,"title":"Paper Solutions","desc":"","sem":"civilsem","subject":"Previous Year Papers","type":"paper","branch":"civilsem","url":"https://mbmec.weebly.com/civil-sem-solution.html","user":"Kapil Gupta"},
+{"id":2958,"title":"Civil semester PYQ","desc":"","sem":"civilsem","subject":"PYQ 2023","type":"paper","branch":"civilsem","url":"https://drive.google.com/file/d/1-TA7KjQ2OkWVR1s023u44QesfCmSCulJ/view?usp=drivesdk","user":"Mukul Parwani"},
+{"id":2968,"title":"Vector Calculus","desc":"","sem":"M1","subject":"Engineering Mathematics","type":"book","branch":"M1","url":"https://drive.google.com/file/d/1fGwR7_QyWdMj2tPk3YFOHM9SiW5KPNCV/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":2969,"title":"College's M-1 Book","desc":"Gokhroo & Kumbhat","sem":"M1","subject":"Mathematics","type":"book","branch":"M1","url":"https://drive.google.com/file/d/1-PfgGU9Q6hYxyAj52Jfq0bQJWsdSvz9P/view","user":"Kapil Gupta"},
+{"id":2970,"title":"M-1 Book Solution","desc":"Gokhroo & Kumbhat","sem":"M1","subject":"Mathematics","type":"book","branch":"M1","url":"https://drive.google.com/file/d/1n3uRlYT_slAxbcLcOFU4lDGr6WmguRx8/view","user":"Kapil Gupta"},
+{"id":2973,"title":"1st Year Formula Sheet","desc":"","sem":"M1","subject":"Engineering Mathematics","type":"notes","branch":"M1","url":"https://drive.google.com/file/d/11UFfYMba-dt90IuRiEdkHvTQEP_xGQax/view","user":"Kapil Gupta"},
+{"id":2974,"title":"M-1 Formula List","desc":"","sem":"M1","subject":"Engineering Mathematics-1","type":"notes","branch":"M1","url":"https://drive.google.com/file/d/1ikJTMQj1zwWAWgNbJiB3lGxMoEzsVNSC/view","user":"Kapil Gupta"},
+{"id":2976,"title":"Maths-I Notes","desc":"All Topics Covered Notes by Jay Patel","sem":"M1","subject":"Engineering Maths-I","type":"notes","branch":"M1","url":"https://drive.google.com/drive/folders/1bjLcJFYpHXoND3kcsifcRLdlwn1UF06c","user":"Jay Patel"},
+{"id":2989,"title":"Important Questions List","desc":"","sem":"M1","subject":"M-1","type":"paper","branch":"M1","url":"https://drive.google.com/file/d/1Y9ohaTjVwMj4GmemI9dOz291QkolTys2/view","user":"Kapil Gupta"},
+{"id":2991,"title":"Mathematics -1st Sem Paper 2024","desc":"Mathematics -1st Sem Paper 2023-24","sem":"M1","subject":"Mathematics","type":"paper","branch":"M1","url":"https://drive.google.com/file/d/1Rvqo3aQ3AFL4KiDA9lwTGFf6WWPKjvSJ/view?usp=drivesdk","user":"Naresh Choudhary"},
+{"id":2994,"title":"MATHEMATICS-1_PYQ_2022","desc":"","sem":"M1","subject":"MATHEMATICS1","type":"paper","branch":"M1","url":"https://drive.google.com/file/d/1_ySRD8MTyJYZKdYttVun5vaVWQoe3VMQ/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":2997,"title":"Mathematics (M1","desc":"","sem":"M1","subject":"PYQ 2023","type":"paper","branch":"M1","url":"https://drive.google.com/file/d/1-WYjqqRO5lpSwaZmzYlIc4cbtSI8mWRu/view?usp=drivesdk","user":"Mukul Parwani"},
+{"id":3008,"title":"M-2 BOOK Solutions","desc":"","sem":"M2","subject":"Mathematics","type":"book","branch":"M2","url":"https://drive.google.com/file/d/1C5-4BVVg0PdqILKykjOY1CEuncBQ2pSc/view","user":"Kapil Gupta"},
+{"id":3009,"title":"M-2 Book","desc":"Gokhroo & Kumbhat","sem":"M2","subject":"Mathematics","type":"book","branch":"M2","url":"https://drive.google.com/file/d/1c0QmWUss4B6RR3EJTeKBFoypuST5WeyV/view","user":"Kapil Gupta"},
+{"id":3012,"title":"M-2 Notes","desc":"","sem":"M2","subject":"Differential Equations","type":"notes","branch":"M2","url":"https://drive.google.com/file/d/1JnepiqX-l3ZMLyJaIOWFQ4BYwpdG61bZ/view","user":"Kapil Gupta"},
+{"id":3015,"title":"M-2 Handwritten Notes","desc":"","sem":"M2","subject":"Engineering Mathematics-2","type":"notes","branch":"M2","url":"https://drive.google.com/file/d/140MDhGxEvnKRkpRM30X1S_x9FbWKGawH/view","user":"Kapil Gupta"},
+{"id":3016,"title":"M-2 Notes","desc":"","sem":"M2","subject":"Engineering Mathematics-2","type":"notes","branch":"M2","url":"https://drive.google.com/file/d/1lSyQV5SsNuJE1OWuRbHKAseS3vtqJaXj/view","user":"Kapil Gupta"},
+{"id":3029,"title":"Previous Year paper 2024","desc":"","sem":"M2","subject":"All papers 2024","type":"paper","branch":"M2","url":"https://drive.google.com/file/d/1auDgThfHgqkgUbnweA1hNFN4gqFnSUVI","user":"Sunil Kumar"},
+{"id":3030,"title":"M-2 online paper","desc":"","sem":"M2","subject":"mathematics","type":"paper","branch":"M2","url":"https://drive.google.com/file/d/1jjk3sGNYN6TYErUmiJaru8kycnILvNMZ/view?usp=drivesdk","user":"Devraj Gurjar"},
+{"id":3033,"title":"2013-2018","desc":"","sem":"M2","subject":"Previous Year Papers","type":"paper","branch":"M2","url":"https://drive.google.com/file/d/13ymkOIMugcPNoLtoiTLCfaj2qtZVdanY/view","user":"Kapil Gupta"},
+{"id":3040,"title":"Advanced Engineering Maths","desc":"H.K. DASS","sem":"M3","subject":"Mathematics","type":"book","branch":"M3","url":"https://drive.google.com/file/d/1JVagwRncQ4LHM6974yA-QaSUL6-Q1BPw/view","user":"Kapil Gupta"},
+{"id":3041,"title":"Analytic Function","desc":"","sem":"M3","subject":"Mathematics -3","type":"book","branch":"M3","url":"https://drive.google.com/file/d/16n6z0VSPqdU5Z_DnbV4r3L8h4xqTeb69/view","user":"Kapil Gupta"},
+{"id":3046,"title":"Eigen Values And Eigen Vector","desc":"Maths for Computing Matrix Chapter Questions and Examples","sem":"M3","subject":"Maths For Computing","type":"book","branch":"M3","url":"https://drive.google.com/file/d/1CnbIThhDBo6jSYggo5UycH4iYNxHGD-d/view?usp=drivesdk","user":"vranda manihar"},
+{"id":3051,"title":"Statics And Probability","desc":"Password- Kapil123","sem":"M3","subject":"Mathematics","type":"book","branch":"M3","url":"https://drive.google.com/file/d/1ssGsLjpc0k3L40_5W9LUZ5si0oFdZl3f/view","user":"Kapil Gupta"},
+{"id":3052,"title":"Separation Of Variables","desc":"","sem":"M3","subject":"Differential Equation","type":"notes","branch":"M3","url":"https://drive.google.com/file/d/19eI_dldAEkZk86jrg3brApquMUtK9PiB/view","user":"Kapil Gupta"},
+{"id":3053,"title":"Analytic Function","desc":"","sem":"M3","subject":"Mathematics -3","type":"notes","branch":"M3","url":"https://drive.google.com/file/d/1ExqpjRmi9OJPtF3AeMloRljh97XMKl0i/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":3055,"title":"Bivariate Frequency Distribution","desc":"","sem":"M3","subject":"Mathematics -3","type":"notes","branch":"M3","url":"https://drive.google.com/file/d/1ywXkn0Eghs74zw8l58yQjtPAvVlMYeWr/view","user":"Kapil Gupta"},
+{"id":3059,"title":"Complex Analysis","desc":"","sem":"M3","subject":"Mathematics -3","type":"notes","branch":"M3","url":"https://drive.google.com/file/d/17Uqe3sXo93k4QtyR5NkeGqm830QH1g2L/view","user":"Kapil Gupta"},
+{"id":3063,"title":"Partial Differential Equation","desc":"","sem":"M3","subject":"Mathematics -3","type":"notes","branch":"M3","url":"https://drive.google.com/file/d/1KsKZnFKMhpXM9yHN58dLpkk1-Z2EQ6EG/view","user":"Kapil Gupta"},
+{"id":3081,"title":"Papers","desc":"","sem":"M3","subject":"Chemical","type":"paper","branch":"M3","url":"https://drive.google.com/file/d/1R0hgyWfB8CIkrz8mZzfzOrg5lizRMPyO/view","user":"Kapil Gupta"},
+{"id":3083,"title":"Previous year Papers","desc":"","sem":"M3","subject":"Civil","type":"paper","branch":"M3","url":"https://drive.google.com/file/d/17Nb-S9SWwo_nPBA4GL7Em_loldiYbzXi/view","user":"Kapil Gupta"},
+{"id":3084,"title":"Papers","desc":"","sem":"M3","subject":"CSE","type":"paper","branch":"M3","url":"https://drive.google.com/file/d/1QTCASsYcZaIKzJZe51MZQJpGQD3JGUCg/view","user":"Kapil Gupta"},
+{"id":3087,"title":"Papers","desc":"","sem":"M3","subject":"ECC","type":"paper","branch":"M3","url":"https://drive.google.com/file/d/1RKqDrg7fZcrHRXQ9uudoevM3E7Hx8iJs/view","user":"Kapil Gupta"},
+{"id":3088,"title":"Papers","desc":"","sem":"M3","subject":"ECE","type":"paper","branch":"M3","url":"https://drive.google.com/file/d/16Lyiv4L1JU9InEBuqtt1ymnB4XARtd4z/view","user":"Kapil Gupta"},
+{"id":3089,"title":"Papers","desc":"","sem":"M3","subject":"EE","type":"paper","branch":"M3","url":"https://drive.google.com/file/d/1x54_qn_7ki6YS4dHG3dgmk7RNC5RR10C/view","user":"Kapil Gupta"},
+{"id":3093,"title":"Previous Year Papers","desc":"","sem":"M3","subject":"Mechanical","type":"paper","branch":"M3","url":"https://drive.google.com/file/d/13oN07o_G9NkaZxPKyIuyzhYARmCGnEe3/view","user":"Kapil Gupta"},
+{"id":3095,"title":"BESSEL FUNCTIONS","desc":"","sem":"M4","subject":"CSE","type":"book","branch":"M4","url":"https://drive.google.com/file/d/15Ga5jrJmTa2ib8e-2wFZXZ366KOzLDuk/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":3096,"title":"Laplace Transformation","desc":"","sem":"M4","subject":"CSE","type":"book","branch":"M4","url":"https://drive.google.com/file/d/15MIwXHK2I-jHPRvjCkNiL8dtnVNVU3Cg/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":3099,"title":"Numerical Methods by R.K. jain","desc":"","sem":"M4","subject":"CSE","type":"book","branch":"M4","url":"https://drive.google.com/file/d/1DvUdELvD-UFadGj5xzEMCSObi7kgesyS/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":3101,"title":"Laplace Transformation","desc":"","sem":"M4","subject":"CSE","type":"notes","branch":"M4","url":"https://drive.google.com/file/d/1NIOw2TkphB9QhaMTUEdL5mfz3mERFMFQ/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":3102,"title":"Legendre Polynomial Functions","desc":"","sem":"M4","subject":"CSE","type":"notes","branch":"M4","url":"https://drive.google.com/file/d/1fpQnpzqW9ehdQAQtzbhdgNkClFKTXor_/view","user":"Kapil Gupta"},
+{"id":3103,"title":"Numerical Analysis","desc":"","sem":"M4","subject":"CSE","type":"notes","branch":"M4","url":"https://drive.google.com/file/d/15OmUrdFwqm7bzb7SFNxYBWiWkwGRrtWT/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":3105,"title":"Chemical","desc":"Password- sels","sem":"M4","subject":"Mathematics","type":"paper","branch":"M4","url":"https://drive.google.com/file/d/1Vv5xWgNG30MlA3bHaknSuS7tXqkkFnKj/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":3106,"title":"CSE/IT","desc":"Password- sels","sem":"M4","subject":"Mathematics","type":"paper","branch":"M4","url":"https://drive.google.com/file/d/1WBWWVThE0XusvVJ1NkxCxK-BR5O5iynK/view?usp=drivesdk","user":"Kapil Gupta"},
+{"id":3107,"title":"Electronics Principle Book","desc":"","sem":"mechanicalsem","subject":"Basic Electronics Engineering","type":"book","branch":"mechanicalsem","url":"https://drive.google.com/file/d/1R35okTURYf84dNMfrE10Arpp1vrnsbLV/view","user":"Kapil Gupta"},
+{"id":3108,"title":"Mechanical Lab Manual","desc":"mechanical 1st year lab manual","sem":"mechanicalsem","subject":"Basic Mechanical Engineering","type":"book","branch":"mechanicalsem","url":"https://drive.google.com/file/d/12hHw0efdfa2yGVr-wPsy2I3HlRBFuBoX","user":"Khush Purohit"},
+{"id":3116,"title":"EME Book","desc":"","sem":"mechanicalsem","subject":"EME","type":"book","branch":"mechanicalsem","url":"https://drive.google.com/file/d/1cAstrau4yKrCSVK1fy8FCaY5Rauv1y5T/view","user":"Kapil Gupta"},
+{"id":3127,"title":"Previous Year Viva Asked Questions","desc":"Viva Questions","sem":"mechanicalsem","subject":"All Subjects","type":"file","branch":"mechanicalsem","url":"https://drive.google.com/drive/folders/1dA1oCbCMxgDHBYgkU7as-DyOZ4PMf-vv?usp=drive_link","user":"Khush Purohit"},
+{"id":3199,"title":"mechanical sem 2025 paper","desc":"Mech Sem 2025 Paper","sem":"mechanicalsem","subject":"all subjects","type":"paper","branch":"mechanicalsem","url":"https://drive.google.com/file/d/1BE1c-pBpfslFjBZ0NWiI7WwHS2TFckEL/view?usp=drivesdk","user":"Aayush mahawar"},
+{"id":3205,"title":"Previous Papers Solution","desc":"","sem":"mechanicalsem","subject":"Mechanical SEM","type":"paper","branch":"mechanicalsem","url":"https://mbmec.weebly.com/paper-soln-of-mechanical-sem.html","user":"Kapil Gupta"},
+{"id":3206,"title":"Previous Year Papers","desc":"","sem":"mechanicalsem","subject":"Mechanical Sem","type":"paper","branch":"mechanicalsem","url":"https://mbmec.weebly.com/mechanical-sem-papers.html","user":"Kapil Gupta"},
+{"id":3207,"title":"Previous Years Online Papers","desc":"","sem":"mechanicalsem","subject":"Online Exams","type":"paper","branch":"mechanicalsem","url":"https://mbmec.weebly.com/2020-online-papers.html","user":"Kapil Gupta"},
+{"id":3209,"title":"Mechanical semester PYQ","desc":"","sem":"mechanicalsem","subject":"PYQ 2023","type":"paper","branch":"mechanicalsem","url":"https://drive.google.com/file/d/1-Ojvuiyaw8Q_gfF8PCeHc03XcfW6h8Id/view?usp=drivesdk","user":"Mukul Parwani"},
+{"id":3223,"title":"Chemical syllabus","desc":"(ll, lll, lV years)","sem":"null","subject":"Chemical","type":"null","branch":"CH","url":"https://drive.google.com/file/d/1n6ayNuvy5Eq8eZ2Gzk05eNYhFn3NVnlr/view?usp=sharing","user":"Priyanshi Dubey"}
+];
+
+// ============================================================
+// BRANCH CONFIG
+// ============================================================
+const BRANCH_CONFIG = {
+  AI: { color: '#7c3aed', label: 'AI', emoji: '🤖' },
+  BCT: { color: '#0891b2', label: 'BCT', emoji: '🏗️' },
+  CE: { color: '#0d9488', label: 'Civil', emoji: '🏛️' },
+  CH: { color: '#d97706', label: 'Chemical', emoji: '⚗️' },
+  CSE: { color: '#2563eb', label: 'CSE', emoji: '💻' },
+  ECC: { color: '#7c3aed', label: 'ECC', emoji: '📡' },
+  ECE: { color: '#b45309', label: 'ECE', emoji: '📻' },
+  EE: { color: '#dc2626', label: 'EE', emoji: '⚡' },
+  EEE: { color: '#c2410c', label: 'EEE', emoji: '🔌' },
+  IT: { color: '#0284c7', label: 'IT', emoji: '🖥️' },
+  ME: { color: '#6d28d9', label: 'Mech', emoji: '⚙️' },
+  MI: { color: '#854d0e', label: 'Mining', emoji: '⛏️' },
+  'P&I': { color: '#9d174d', label: 'P&I', emoji: '🏭' },
+  PE: { color: '#166534', label: 'PE', emoji: '🛢️' },
+  civilsem: { color: '#0f766e', label: 'CivilSem', emoji: '📐' },
+  mechanicalsem: { color: '#9333ea', label: 'MechSem', emoji: '🔧' },
+  M1: { color: '#1d4ed8', label: 'M1', emoji: '📊' },
+  M2: { color: '#1d4ed8', label: 'M2', emoji: '📊' },
+  M3: { color: '#1d4ed8', label: 'M3', emoji: '📊' },
+  M4: { color: '#1d4ed8', label: 'M4', emoji: '📊' },
+};
+
+const TYPE_CONFIG = {
+  book: { emoji: '📚', color: '#10b981', label: 'Book' },
+  notes: { emoji: '📝', color: '#3b82f6', label: 'Notes' },
+  paper: { emoji: '📄', color: '#f59e0b', label: 'Paper' },
+  file: { emoji: '📁', color: '#8b5cf6', label: 'File' },
+  video: { emoji: '🎬', color: '#ef4444', label: 'Video' },
+  null: { emoji: '📌', color: '#6b7280', label: 'Other' },
+};
+
+// ============================================================
+// STATE
+// ============================================================
+let filtered = [...DATA];
+let currentPage = 1;
+const PER_PAGE = 24;
+let currentView = 'grid';
+let activeBranch = '';
+
+// ============================================================
+// INIT
+// ============================================================
+function init() {
+  renderBranchPills();
+  applyFilters();
+  updateStats();
+
+  window.addEventListener('scroll', () => {
+    const btn = document.getElementById('scrollTop');
+    btn.classList.toggle('visible', window.scrollY > 500);
+  });
+}
+
+function updateStats() {
+  document.getElementById('totalCount').textContent = DATA.length.toLocaleString();
+}
+
+// ============================================================
+// BRANCH PILLS
+// ============================================================
+function renderBranchPills() {
+  const container = document.getElementById('branchPills');
+  const branches = [...new Set(DATA.map(d => d.branch).filter(Boolean))].sort();
+
+  container.innerHTML = '';
+  branches.forEach(br => {
+    const cfg = BRANCH_CONFIG[br] || { color: '#6b7280', label: br };
+    const pill = document.createElement('button');
+    pill.className = `branch-pill${activeBranch === br ? ' active' : ''}`;
+    pill.style.cssText = `background:${cfg.color}22;color:${cfg.color};border-color:${cfg.color}55`;
+    pill.textContent = `${cfg.emoji || ''} ${cfg.label || br}`;
+    if (activeBranch === br) {
+      pill.style.background = cfg.color;
+      pill.style.color = '#fff';
+      pill.style.borderColor = cfg.color;
+    }
+    pill.onclick = () => toggleBranch(br);
+    container.appendChild(pill);
+  });
+}
+
+function toggleBranch(br) {
+  activeBranch = activeBranch === br ? '' : br;
+  renderBranchPills();
+  applyFilters();
+}
+
+// ============================================================
+// FILTERS
+// ============================================================
+function applyFilters() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  const sem = document.getElementById('semFilter').value;
+  const type = document.getElementById('typeFilter').value;
+
+  filtered = DATA.filter(item => {
+    const matchBranch = !activeBranch || item.branch === activeBranch;
+    const matchSem = !sem || item.sem === sem;
+    const matchType = !type || item.type === type;
+    const matchQ = !q || 
+      item.title.toLowerCase().includes(q) ||
+      (item.desc && item.desc.toLowerCase().includes(q)) ||
+      (item.subject && item.subject.toLowerCase().includes(q)) ||
+      (item.user && item.user.toLowerCase().includes(q)) ||
+      (item.branch && item.branch.toLowerCase().includes(q));
+    
+    return matchBranch && matchSem && matchType && matchQ;
+  });
+
+  currentPage = 1;
+  render();
+}
+
+function clearFilters() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('semFilter').value = '';
+  document.getElementById('typeFilter').value = '';
+  activeBranch = '';
+  renderBranchPills();
+  applyFilters();
+}
+
+// ============================================================
+// RENDER
+// ============================================================
+function setView(v) {
+  currentView = v;
+  const grid = document.getElementById('resultsGrid');
+  grid.className = `grid${v === 'list' ? ' list-view' : ''}`;
+  document.getElementById('gridViewBtn').classList.toggle('active', v === 'grid');
+  document.getElementById('listViewBtn').classList.toggle('active', v === 'list');
+}
+
+function render() {
+  const grid = document.getElementById('resultsGrid');
+  const total = filtered.length;
+  const start = (currentPage - 1) * PER_PAGE;
+  const end = Math.min(start + PER_PAGE, total);
+  const page = filtered.slice(start, end);
+
+  document.getElementById('shownCount').textContent = page.length;
+  document.getElementById('filteredCount').textContent = total.toLocaleString();
+
+  if (total === 0) {
+    grid.innerHTML = `
+      <div class="no-results" style="grid-column:1/-1">
+        <h3>😕 No results found</h3>
+        <p>Try different search terms or clear filters</p>
+      </div>`;
+    renderPagination(0, 0);
+    return;
+  }
+
+  grid.innerHTML = page.map(item => buildCard(item)).join('');
+  renderPagination(total, start);
+}
+
+function buildCard(item) {
+  const br = BRANCH_CONFIG[item.branch] || { color: '#6b7280', label: item.branch || '?', emoji: '📌' };
+  const ty = TYPE_CONFIG[item.type] || TYPE_CONFIG['null'];
+  const hasUrl = item.url && item.url.trim() !== '';
+  
+  return `
+    <div class="card" style="--branch-color:${br.color}">
+      <div class="card-header">
+        <span class="card-num">#${item.id}</span>
+        <div class="card-badges">
+          <span class="badge" style="background:${br.color}22;color:${br.color}">${br.emoji} ${br.label || item.branch}</span>
+          <span class="badge" style="background:${ty.color}22;color:${ty.color}">${ty.emoji} ${ty.label}</span>
+        </div>
+      </div>
+      <div class="card-title">${escHtml(item.title)}</div>
+      ${item.desc ? `<div class="card-desc">${escHtml(item.desc.substring(0,100))}${item.desc.length > 100 ? '…' : ''}</div>` : ''}
+      <div class="card-meta">
+        <span class="meta-item">📅 ${item.sem}</span>
+        ${item.subject ? `<span class="meta-item">📖 ${escHtml(item.subject.substring(0,30))}${item.subject.length>30?'…':''}</span>` : ''}
+        ${item.user ? `<span class="meta-item">👤 ${escHtml(item.user)}</span>` : ''}
+      </div>
+      <div class="card-actions">
+        ${hasUrl ? `
+          <a class="btn-primary" href="${escHtml(item.url)}" target="_blank" rel="noopener" style="background:${br.color}">
+            🔗 Open File
+          </a>
+          <button class="btn-copy" onclick="copyLink('${escHtml(item.url)}', this)" title="Copy link">📋</button>
+        ` : `
+          <span class="btn-primary" style="background:#374151;cursor:not-allowed;opacity:0.5">No Link</span>
+        `}
+      </div>
+    </div>`;
+}
+
+function escHtml(str) {
+  return String(str || '')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
+}
+
+function copyLink(url, btn) {
+  navigator.clipboard.writeText(url).then(() => {
+    btn.textContent = '✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋'; btn.classList.remove('copied'); }, 2000);
+  }).catch(() => {
+    btn.textContent = '!';
+    setTimeout(() => { btn.textContent = '📋'; }, 2000);
+  });
+}
+
+// ============================================================
+// PAGINATION
+// ============================================================
+function renderPagination(total, start) {
+  const container = document.getElementById('pagination');
+  if (total <= PER_PAGE) { container.innerHTML = ''; return; }
+
+  const totalPages = Math.ceil(total / PER_PAGE);
+  let html = '';
+
+  html += `<button class="page-btn" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''}>← Prev</button>`;
+
+  const range = getPageRange(currentPage, totalPages);
+  range.forEach(p => {
+    if (p === '...') {
+      html += `<span class="page-info">…</span>`;
+    } else {
+      html += `<button class="page-btn${p===currentPage?' active':''}" onclick="goPage(${p})">${p}</button>`;
+    }
+  });
+
+  html += `<button class="page-btn" onclick="goPage(${currentPage+1})" ${currentPage===totalPages?'disabled':''}>Next →</button>`;
+  html += `<span class="page-info">${start+1}–${Math.min(start+PER_PAGE,total)} of ${total}</span>`;
+
+  container.innerHTML = html;
+}
+
+function getPageRange(curr, total) {
+  if (total <= 7) return Array.from({length:total},(_,i)=>i+1);
+  const range = [];
+  if (curr <= 4) {
+    range.push(1,2,3,4,5,'...',total);
+  } else if (curr >= total-3) {
+    range.push(1,'...',total-4,total-3,total-2,total-1,total);
+  } else {
+    range.push(1,'...',curr-1,curr,curr+1,'...',total);
+  }
+  return range;
+}
+
+function goPage(p) {
+  const totalPages = Math.ceil(filtered.length / PER_PAGE);
+  if (p < 1 || p > totalPages) return;
+  currentPage = p;
+  render();
+  window.scrollTo({top: document.querySelector('.hero').offsetHeight, behavior:'smooth'});
+}
+
+// ============================================================
+// START
+// ============================================================
+init();
+</script>
+</body>
+</html>
